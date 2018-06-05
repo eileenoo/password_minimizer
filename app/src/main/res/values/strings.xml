@@ -1,3 +1,7 @@
 <resources>
-    <string name="app_name">password_minimizer</string>
+    <string name="app_name">Password Minimizer</string>
+
+    <string name="string_create_simple_pw">Leichtes Passwort erstellen.</string>
+    <string name="string_create_middle_pw">Mittleres Passwort erstellen.</string>
+    <string name="string_create_strong_pw">Starkes Passwort erstellen.</string>
 </resources>
