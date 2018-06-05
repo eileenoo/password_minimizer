@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_pw_details_websites"
+        android:icon="@drawable/ic_share"
+        android:title="@string/string_navigation_pw_detail_websites" />
+
+    <item
+        android:id="@+id/navigation_pw_detail_settings"
+        android:icon="@drawable/ic_settings"
+        android:title="@string/string_navigation_pw_detail_settings" />
+
+</menu>

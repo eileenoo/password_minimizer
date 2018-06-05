@@ -4,4 +4,7 @@
     <string name="string_create_simple_pw">Leichtes Passwort erstellen.</string>
     <string name="string_create_middle_pw">Mittleres Passwort erstellen.</string>
     <string name="string_create_strong_pw">Starkes Passwort erstellen.</string>
+
+    <string name="string_navigation_pw_detail_websites">Webseiten</string>
+    <string name="string_navigation_pw_detail_settings">Einstellungen</string>
 </resources>
