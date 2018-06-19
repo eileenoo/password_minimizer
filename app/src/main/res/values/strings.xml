@@ -7,4 +7,13 @@
 
     <string name="string_navigation_pw_detail_websites">Webseiten</string>
     <string name="string_navigation_pw_detail_settings">Einstellungen</string>
+
+    <string name="string_drawer_open">Öffnen</string>
+    <string name="string_drawer_close">Schließen</string>
+    <string name="string_drawer_home">Startseite</string>
+    <string name="string_drawer_home_description">Gehe zum Einstiegspunkt</string>
+    <string name="string_drawer_preferences">Einstellungen</string>
+    <string name="string_drawer_preferences_description">Ändere deine Einstellungen</string>
+    <string name="string_drawer_about">Über uns</string>
+    <string name="string_drawer_about_description">Lerne uns kennen</string>
 </resources>

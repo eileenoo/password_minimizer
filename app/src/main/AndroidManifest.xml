@@ -19,7 +19,7 @@
         <activity android:name=".activities.CreatePasswordActivity" />
         <activity android:name=".activities.StartPinActivity" />
         <activity android:name=".activities.PasswordDetailWebsitesActivity" />
-        <activity android:name=".activities.PasswordDetailSettingsActivity"></activity>
+        <activity android:name=".activities.PasswordDetailSettingsActivity" />
     </application>
 
 </manifest>
