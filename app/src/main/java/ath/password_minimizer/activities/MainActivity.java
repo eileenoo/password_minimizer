@@ -68,11 +68,14 @@ public class MainActivity extends AppCompatActivity {
         DrawerListAdapter adapter = new DrawerListAdapter(this, mNavItems);
         mDrawerList.setAdapter(adapter);
 
+
         // Drawer Item click listeners
         mDrawerList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                //selectItemFromDrawer(position);
+                if (position == 0) {
+                    // Go to main activity when in other class
+                }
             }
         });
 
