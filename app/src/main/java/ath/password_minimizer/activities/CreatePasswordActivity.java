@@ -3,17 +3,57 @@ package ath.password_minimizer.activities;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.LinearLayout;
 
 import ath.password_minimizer.R;
+import model.PasswordStrength;
 
-public class CreatePasswordActivity extends AppCompatActivity {
+public class CreatePasswordActivity extends AppCompatActivity
+{
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_password);
 
+        setupOnClickEvents();
     }
 
+    private void setupOnClickEvents()
+    {
+        findViewById(R.id.linearLayout_pw_simple).setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    Intent intent = new Intent(CreatePasswordActivity.this, PickPasswordActivity.class);
+                    intent.putExtra("PasswordStrength", PasswordStrength.SIMPLE);
+                    startActivity(intent);
+                }
+            });
 
+        findViewById(R.id.linearLayout_pw_middle).setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        Intent intent = new Intent(CreatePasswordActivity.this, PickPasswordActivity.class);
+                        intent.putExtra("PasswordStrength", PasswordStrength.MIDDLE);
+                        startActivity(intent);
+                    }
+                });
+
+        findViewById(R.id.linearLayout_pw_strong).setOnClickListener(new View.OnClickListener()
+                {
+                    @Override
+                    public void onClick(View v)
+                    {
+                        Intent intent = new Intent(CreatePasswordActivity.this, PickPasswordActivity.class);
+                        intent.putExtra("PasswordStrength", PasswordStrength.STRONG);
+                        startActivity(intent);
+                    }
+                });
+    }
 }

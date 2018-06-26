@@ -10,7 +10,8 @@ public class PicturePassword {
     private String passwordName;
     private PasswordStrength passwordStrength;
     private String imagePath;
-
+    private String password;
+    private int id;
 
     public PicturePassword(String passwordName, PasswordStrength passwordStrength, String imagePath) {
         this.passwordName = passwordName;
