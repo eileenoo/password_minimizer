@@ -20,6 +20,7 @@
         <activity android:name=".activities.StartPinActivity" />
         <activity android:name=".activities.PasswordDetailWebsitesActivity" />
         <activity android:name=".activities.PasswordDetailSettingsActivity" />
+        <activity android:name=".activities.BaseActivity"></activity>
     </application>
 
 </manifest>
