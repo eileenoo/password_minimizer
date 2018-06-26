@@ -7,9 +7,9 @@ package model;
 public class PicturePassword {
 
     // TODO: Feel free to modifiy
-    private String passwordName;
-    private PasswordStrength passwordStrength;
-    private String imagePath;
+    public String passwordName;
+    public PasswordStrength passwordStrength;
+    public String imagePath;
 
 
     public PicturePassword(String passwordName, PasswordStrength passwordStrength, String imagePath) {

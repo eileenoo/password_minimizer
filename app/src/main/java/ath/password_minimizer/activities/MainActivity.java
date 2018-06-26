@@ -1,27 +1,25 @@
 package ath.password_minimizer.activities;
 
 import android.content.Intent;
-import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 
 import java.util.ArrayList;
 
 import ath.password_minimizer.R;
-import listAdapters.DrawerListAdapter;
-import model.NavItem;
+import listAdapters.PasswordListAdapter;
+import model.PasswordStrength;
+import model.PicturePassword;
 
 public class MainActivity extends BaseActivity {
 
     boolean userHasPasswords;
+    ArrayList<PicturePassword> picturePasswords;
+    ListView picturePasswordListView;
+    private static PasswordListAdapter passwordListAdapter;
+    ImageButton addPasswordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,13 +30,29 @@ public class MainActivity extends BaseActivity {
 
         initBurgerMenu();
 
-        ImageButton addPasswordButton = (ImageButton) findViewById(R.id.addPasswordButton);
+        picturePasswordListView = (ListView) findViewById(R.id.password_list);
+
+        // TODO: save data somewhere else and remove dummy data here
+        picturePasswords = new ArrayList<>();
+        picturePasswords.add(new PicturePassword("Einfaches Passwort", PasswordStrength.SIMPLE, "xxx/yy/abc.png"));
+        picturePasswords.add(new PicturePassword("Mittleres Passwort", PasswordStrength.MIDDLE, "xxx/zz/def.png"));
+        //picturePasswords.add(new PicturePassword("Hard Password", PasswordStrength.MIDDLE, "xxx/ddd/def.png"));
+
+        passwordListAdapter = new PasswordListAdapter (picturePasswords, getApplicationContext());
+
+        picturePasswordListView.setAdapter(passwordListAdapter);
+
+        addPasswordButton = (ImageButton) findViewById(R.id.addPasswordButton);
         addPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 openCreatePasswordActivity();
             }
         });
+
+        if (picturePasswords.size() >= 3) {
+            addPasswordButton.setVisibility(View.INVISIBLE);
+        }
     }
 
     /**

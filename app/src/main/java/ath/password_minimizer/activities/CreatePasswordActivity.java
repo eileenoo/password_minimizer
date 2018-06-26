@@ -13,6 +13,8 @@ public class CreatePasswordActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_password);
 
+        //TODO: check which password types already exist and show here only the possible ones
+
         initBurgerMenu();
     }
 
