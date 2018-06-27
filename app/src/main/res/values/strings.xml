@@ -7,4 +7,19 @@
 
     <string name="string_navigation_pw_detail_websites">Webseiten</string>
     <string name="string_navigation_pw_detail_settings">Einstellungen</string>
+
+    <string name="string_pin_1">1</string>
+    <string name="string_pin_2">2</string>
+    <string name="string_pin_3">3</string>
+    <string name="string_pin_4">4</string>
+    <string name="string_pin_5">5</string>
+    <string name="string_pin_6">6</string>
+    <string name="string_pin_7">7</string>
+    <string name="string_pin_8">8</string>
+    <string name="string_pin_9">9</string>
+    <string name="string_pin_0">0</string>
+    <string name="string_pin_delete">delete</string>
+    <string name="string_pin_question">question</string>
+
+    <string name="string_enter_pw">Bitte gib dein Passwort ein.</string>
 </resources>
