@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:background="@color/color_main_violet"
+    tools:context="ath.password_minimizer.activities.CreatePWStep3Activity">
+
+    <TextView
+        android:id="@+id/step3_description"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textSize="@dimen/dimen_create_pw_info_text"
+        android:textColor="@android:color/white"
+        android:text="@string/string_create_pw_choose_num"
+        android:gravity="center"
+        android:layout_weight="1"/>
+
+
+    <GridLayout
+        android:id="@+id/gridlayout_select_num"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="6"
+        android:layout_gravity="center"
+        android:alignmentMode="alignBounds"
+        android:columnCount="3"
+        android:orientation="horizontal"
+        android:rowCount="4"
+        android:rowOrderPreserved="false">
+
+        <Button
+            android:id="@+id/num_1"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:background="@drawable/pin_button_background"
+            android:gravity="center"
+            android:tag="@string/string_pin_1"
+            android:text="@string/string_pin_1"
+            android:textColor="@color/color_button_pin_text" />
+
+        <Button
+            android:id="@+id/num_2"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:background="@drawable/pin_button_background"
+            android:gravity="center"
+            android:tag="@string/string_pin_2"
+            android:text="@string/string_pin_2"
+            android:textColor="@color/color_button_pin_text" />
+
+        <Button
+            android:id="@+id/num_3"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
+            android:layout_row="0"
+            android:layout_rowWeight="1"
+            android:background="@drawable/pin_button_background"
+            android:gravity="center"
+            android:tag="@string/string_pin_3"
+            android:text="@string/string_pin_3"
+            android:textColor="@color/color_button_pin_text" />
+
+        <Button
+            android:id="@+id/num_4"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:background="@drawable/pin_button_background"
+            android:gravity="center"
+            android:tag="@string/string_pin_4"
+            android:text="@string/string_pin_4"
+            android:textColor="@color/color_button_pin_text" />
+
+        <Button
+            android:id="@+id/num_5"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:background="@drawable/pin_button_background"
+            android:gravity="center"
+            android:tag="@string/string_pin_5"
+            android:text="@string/string_pin_5"
+            android:textColor="@color/color_button_pin_text" />
+
+        <Button
+            android:id="@+id/num_6"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
+            android:layout_row="1"
+            android:layout_rowWeight="1"
+            android:background="@drawable/pin_button_background"
+            android:gravity="center"
+            android:tag="@string/string_pin_6"
+            android:text="@string/string_pin_6"
+            android:textColor="@color/color_button_pin_text" />
+
+        <Button
+            android:id="@+id/num_7"
+            android:layout_column="0"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
+            android:layout_row="2"
+            android:layout_rowWeight="1"
+            android:background="@drawable/pin_button_background"
+            android:gravity="center"
+            android:tag="@string/string_pin_7"
+            android:text="@string/string_pin_7"
+            android:textColor="@color/color_button_pin_text" />
+
+        <Button
+            android:id="@+id/num_8"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
+            android:layout_row="2"
+            android:layout_rowWeight="1"
+            android:background="@drawable/pin_button_background"
+            android:gravity="center"
+            android:tag="@string/string_pin_8"
+            android:text="@string/string_pin_8"
+            android:textColor="@color/color_button_pin_text" />
+
+        <Button
+            android:id="@+id/num_9"
+            android:layout_column="2"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
+            android:layout_row="2"
+            android:layout_rowWeight="1"
+            android:background="@drawable/pin_button_background"
+            android:gravity="center"
+            android:tag="@string/string_pin_9"
+            android:text="@string/string_pin_9"
+            android:textColor="@color/color_button_pin_text" />
+
+
+        <Button
+            android:id="@+id/num_0"
+            android:layout_column="1"
+            android:layout_columnWeight="1"
+            android:layout_gravity="fill_horizontal"
+            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
+            android:layout_row="3"
+            android:layout_rowWeight="1"
+            android:background="@drawable/pin_button_background"
+            android:gravity="center"
+            android:tag="@string/string_pin_0"
+            android:text="@string/string_pin_0"
+            android:textColor="@color/color_button_pin_text" />
+
+
+    </GridLayout>
+
+    <Button
+        android:id="@+id/step3_btn_next"
+        android:text="@string/string_btn_next"
+        android:textAllCaps="false"
+        android:layout_margin="@dimen/dimen_buttons_create_pw_margin"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:textColor="@android:color/white"
+        android:background="@drawable/create_pw_button_background"
+        android:textSize="@dimen/dimen_buttons_create_pw_text_size"
+        android:layout_weight="1"/>
+
+    <LinearLayout
+        android:id="@+id/step3_custom_progressbar"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="0.5">
+
+        <RadioButton
+            android:id="@+id/step3_radio1"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+
+        <RadioButton
+            android:id="@+id/step3_radio2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+
+        <RadioButton
+            android:id="@+id/step3_radio3"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_height="match_parent" />
+    </LinearLayout>
+
+</LinearLayout>

@@ -17,7 +17,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".activities.MainActivity"></activity>
+        <activity android:name=".activities.MainActivity" />
         <activity android:name=".activities.CreatePasswordActivity" />
         <activity
             android:name=".activities.StartPinActivity"
@@ -25,12 +25,14 @@
             android:theme="@style/Theme.AppCompat.Light.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity android:name=".activities.PasswordDetailWebsitesActivity" />
         <activity android:name=".activities.PasswordDetailSettingsActivity" />
         <activity android:name=".activities.PickPasswordActivity" />
+        <activity android:name=".activities.CreatePWStep3Activity"></activity>
     </application>
 
 </manifest>
