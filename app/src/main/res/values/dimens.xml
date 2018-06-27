@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="dimen_margin_gridlayout_pin">5dp</dimen>
+    <dimen name="dimen_margin_pin_entry_top">30dp</dimen>
+    <dimen name="dimen_padding_pin_entry">15dp</dimen>
+    <dimen name="dimen_margin_pin_entry">15dp</dimen>
+    <dimen name="dimen_pin_buttons_corner_radius">9dip</dimen>
+    <dimen name="dimen_pin_fields_corner_radius">9dip</dimen>
+    <dimen name="dimen_pin_buttons_margin">9dp</dimen>
+    <dimen name="dimen_pinField_password_text_size">50sp</dimen>
+
+</resources>
