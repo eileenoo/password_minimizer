@@ -178,7 +178,7 @@ public class StartPinActivity extends AppCompatActivity {
         resetPinFieldsAndEnableButtons();
         Intent intentMainActivity = new Intent(StartPinActivity.this, MainActivity.class);
         startActivity(intentMainActivity);
-//        finish();
+        finish();
     }
 
     /**
