@@ -15,6 +15,7 @@ import ath.password_minimizer.R;
 public class CreatePWStep3Activity extends AppCompatActivity {
 
     private String chosenNumber;
+    private boolean isNextButtonEnabled;
     private Button btnNum0, btnNum1, btnNum2, btnNum3, btnNum4, btnNum5, btnNum6, btnNum7, btnNum8, btnNum9, nextButton;
     private ArrayList<Button> numButtons;
 
@@ -27,9 +28,21 @@ public class CreatePWStep3Activity extends AppCompatActivity {
         setOnClickListener();
     }
 
+    @Override
+    protected void onResume() {
+        chosenNumber = null;
+        isNextButtonEnabled = false;
+        setNextButtonClickableStatus();
+        for (Button numbers : numButtons) {
+            numbers.setSelected(false);
+        }
+        super.onResume();
+    }
+
     private void setViewAndDataElements() {
+        isNextButtonEnabled = false;
         nextButton = findViewById(R.id.step3_btn_next);
-        setNextButtonClickableStatus(false);
+        setNextButtonClickableStatus();
         btnNum1 = findViewById(R.id.num_1);
         btnNum2 = findViewById(R.id.num_2);
         btnNum3 = findViewById(R.id.num_3);
@@ -48,11 +61,13 @@ public class CreatePWStep3Activity extends AppCompatActivity {
         nextButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (chosenNumber.equals(null)) {
+                if (chosenNumber == null) {
                     // Set error message
                 } else {
+                    Bundle bundle = getIntent().getExtras();
+                    bundle.putString(Constants.CHOSEN_NUM, chosenNumber);
                     Intent intent = new Intent(CreatePWStep3Activity.this, null);
-                    intent.putExtra(Constants.CHOSEN_NUM, Integer.parseInt(chosenNumber));
+                    intent.putExtras(bundle);
                     startActivity(intent);
                 }
             }
@@ -64,18 +79,25 @@ public class CreatePWStep3Activity extends AppCompatActivity {
                     if (numButton.isSelected()) {
                         numButton.setSelected(false);
                         chosenNumber = null;
+                        isNextButtonEnabled = false;
+                        setNextButtonClickableStatus();
                     } else {
+                        for (Button button: numButtons) {
+                            button.setSelected(false);
+                        }
                         chosenNumber = view.getTag().toString();
                         numButton.setSelected(true);
+                        isNextButtonEnabled = true;
+                        setNextButtonClickableStatus();
                     }
                 }
             });
         }
     }
 
-    private void setNextButtonClickableStatus(boolean isNextButtonClickable) {
-        nextButton.setEnabled(isNextButtonClickable);
-        if (isNextButtonClickable) {
+    private void setNextButtonClickableStatus() {
+        nextButton.setEnabled(isNextButtonEnabled);
+        if (isNextButtonEnabled) {
             nextButton.setBackground(getResources().getDrawable(R.drawable.create_pw_button_background));
             nextButton.setTextColor(getResources().getColor(R.color.color_white));
         } else {
@@ -83,4 +105,6 @@ public class CreatePWStep3Activity extends AppCompatActivity {
             nextButton.setTextColor(getResources().getColor(R.color.color_button_pin_pressed));
         }
     }
+
+
 }

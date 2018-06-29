@@ -60,10 +60,10 @@ public class PickPasswordActivity extends AppCompatActivity
                 }
 
                 // TODO:
-                //Intent intent = new Intent(PickPasswordActivity.this, TODOACTIVITY.class);
-                //intent.putExtra("PasswordStrength", passwordStrength);
+                Intent intent = new Intent(PickPasswordActivity.this, CreatePWStep3Activity.class);
+                intent.putExtra("PasswordStrength", passwordStrength);
 
-                //startActivity(intent);
+                startActivity(intent);
             }
         });
     }
