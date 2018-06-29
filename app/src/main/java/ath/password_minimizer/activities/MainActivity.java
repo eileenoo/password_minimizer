@@ -3,6 +3,7 @@ package ath.password_minimizer.activities;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -42,6 +43,13 @@ public class MainActivity extends BaseActivity {
 
         picturePasswordListView.setAdapter(passwordListAdapter);
 
+        picturePasswordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                openPasswordDetailSettingsActivity();
+            }
+        });
+
         addPasswordButton = (ImageButton) findViewById(R.id.addPasswordButton);
         addPasswordButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,6 +77,14 @@ public class MainActivity extends BaseActivity {
      */
     private void openCreatePasswordActivity() {
         Intent intent = new Intent(this, CreatePasswordActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Redirects to activity, where the user can create a new picture password.
+     */
+    private void openPasswordDetailSettingsActivity() {
+        Intent intent = new Intent(this, PasswordDetailSettingsActivity.class);
         startActivity(intent);
     }
 
