@@ -71,4 +71,14 @@ public class MainActivity extends BaseActivity {
         Intent intent = new Intent(this, CreatePasswordActivity.class);
         startActivity(intent);
     }
+
+    /**
+     * Does not close the app if this is the last activity.
+     */
+    @Override
+    public void onBackPressed() {
+        if (!this.isTaskRoot()) {
+            super.onBackPressed();
+        }
+    }
 }
