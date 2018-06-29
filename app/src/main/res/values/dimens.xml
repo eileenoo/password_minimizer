@@ -13,4 +13,6 @@
     <dimen name="dimen_buttons_create_pw_text_size">20sp</dimen>
     <dimen name="dimen_create_pw_info_text">15sp</dimen>
 
+    <dimen name="dimen_padding_dots">10dp</dimen>
+
 </resources>

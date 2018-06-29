@@ -51,5 +51,36 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:orientation="horizontal"></LinearLayout>
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <!--
+
+        <ImageView
+            android:padding="@dimen/dimen_padding_dots"
+            android:id="@+id/step1_dot1"
+            android:src="@drawable/progress_dot_dark"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:paddingTop="@dimen/dimen_padding_dots"
+            android:paddingBottom="@dimen/dimen_padding_dots"
+            android:paddingLeft="-40dp"
+            android:paddingRight="-40dp"
+            android:id="@+id/step1_dot2"
+            android:src="@drawable/progress_dot"
+            android:layout_width="wrap_content"
+            android:scaleType="centerInside"
+            android:layout_height="match_parent" />
+
+        <ImageView
+            android:padding="@dimen/dimen_padding_dots"
+            android:id="@+id/step1_dot3"
+            android:src="@drawable/progress_dot"
+            android:layout_width="wrap_content"
+            android:scaleType="centerInside"
+            android:layout_height="match_parent" />
+-->
+    </LinearLayout>
 </LinearLayout>

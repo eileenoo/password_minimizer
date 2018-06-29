@@ -57,7 +57,6 @@ public class CreatePWStep2Activity extends AppCompatActivity {
     }
 
     private void setOnClickListener() {
-
         pickImageButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -83,8 +82,6 @@ public class CreatePWStep2Activity extends AppCompatActivity {
                 }
             }
         });
-
-
     }
 
     private void checkPermissions()
