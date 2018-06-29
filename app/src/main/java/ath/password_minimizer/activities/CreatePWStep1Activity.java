@@ -13,6 +13,9 @@ import android.widget.EditText;
 import Util.Constants;
 import ath.password_minimizer.R;
 
+/**
+ * User chooses pw name.
+ */
 public class CreatePWStep1Activity extends AppCompatActivity {
 
     private boolean isNextButtonEnabled;
@@ -75,7 +78,7 @@ public class CreatePWStep1Activity extends AppCompatActivity {
                 if (!pwName.equals("")) {
                     Bundle bundle = getIntent().getExtras();
                     bundle.putString(Constants.CHOSEN_NAME, pwName);
-                    Intent intent = new Intent(CreatePWStep1Activity.this, CreatePWStep3Activity.class);
+                    Intent intent = new Intent(CreatePWStep1Activity.this, CreatePWStep2Activity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else {

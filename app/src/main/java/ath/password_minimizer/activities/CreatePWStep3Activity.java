@@ -12,6 +12,9 @@ import java.util.Collections;
 import Util.Constants;
 import ath.password_minimizer.R;
 
+/**
+ * User chooses number.
+ */
 public class CreatePWStep3Activity extends AppCompatActivity {
 
     private String chosenNumber;
@@ -66,7 +69,7 @@ public class CreatePWStep3Activity extends AppCompatActivity {
                 } else {
                     Bundle bundle = getIntent().getExtras();
                     bundle.putString(Constants.CHOSEN_NUM, chosenNumber);
-                    Intent intent = new Intent(CreatePWStep3Activity.this, null);
+                    Intent intent = new Intent(CreatePWStep3Activity.this, PickPasswordActivity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }

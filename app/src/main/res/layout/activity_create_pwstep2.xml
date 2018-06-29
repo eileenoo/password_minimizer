@@ -5,15 +5,15 @@
     android:layout_height="match_parent"
     android:background="@color/color_main_violet"
     android:orientation="vertical"
-    tools:context="ath.password_minimizer.activities.CreatePWStep1Activity">
+    tools:context="ath.password_minimizer.activities.CreatePWStep2Activity">
 
     <TextView
-        android:id="@+id/step1_description"
+        android:id="@+id/step2_description"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:gravity="center"
-        android:text="@string/string_create_pw_choose_name"
+        android:text="@string/string_create_pw_choose_image"
         android:textColor="@android:color/white"
         android:textSize="@dimen/dimen_create_pw_info_text" />
 
@@ -24,18 +24,27 @@
         android:gravity="center"
         android:orientation="vertical">
 
-        <EditText
-            android:id="@+id/pw_name_field"
-            android:layout_width="match_parent"
+        <ImageButton
+            android:id="@+id/pickImageButton"
+            android:backgroundTint="@android:color/transparent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="@dimen/dimen_buttons_create_pw_margin"
-            android:layout_marginRight="@dimen/dimen_buttons_create_pw_margin"
-            android:hint="@string/string_create_pw_hint_name" />
+            android:src="@mipmap/ic_launcher_round"
+            android:layout_gravity="center"
+            android:contentDescription="@string/string_create_pw_choose_image_description"/>
+
+        <ImageView
+            android:id="@+id/pickedImage"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            />
 
     </LinearLayout>
 
     <Button
-        android:id="@+id/step1_btn_next"
+        android:id="@+id/step2_btn_next"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/dimen_buttons_create_pw_margin"
@@ -47,9 +56,10 @@
         android:textSize="@dimen/dimen_buttons_create_pw_text_size" />
 
     <LinearLayout
-        android:id="@+id/step1_custom_progressbar"
+        android:id="@+id/step2_custom_progressbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
         android:orientation="horizontal"></LinearLayout>
+
 </LinearLayout>
