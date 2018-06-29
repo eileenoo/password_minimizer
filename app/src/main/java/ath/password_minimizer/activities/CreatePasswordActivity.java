@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import Util.Constants;
 import ath.password_minimizer.R;
 import model.PasswordStrength;
 
@@ -28,8 +29,8 @@ public class CreatePasswordActivity extends AppCompatActivity
                 @Override
                 public void onClick(View v)
                 {
-                    Intent intent = new Intent(CreatePasswordActivity.this, PickPasswordActivity.class);
-                    intent.putExtra("PasswordStrength", PasswordStrength.SIMPLE);
+                    Intent intent = new Intent(CreatePasswordActivity.this, CreatePWStep1Activity.class);
+                    intent.putExtra(Constants.CHOSEN_PW_STRENGTH, PasswordStrength.SIMPLE);
                     startActivity(intent);
                 }
             });
@@ -39,8 +40,8 @@ public class CreatePasswordActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
-                        Intent intent = new Intent(CreatePasswordActivity.this, PickPasswordActivity.class);
-                        intent.putExtra("PasswordStrength", PasswordStrength.MIDDLE);
+                        Intent intent = new Intent(CreatePasswordActivity.this, CreatePWStep1Activity.class);
+                        intent.putExtra(Constants.CHOSEN_PW_STRENGTH, PasswordStrength.MIDDLE);
                         startActivity(intent);
                     }
                 });
@@ -51,7 +52,7 @@ public class CreatePasswordActivity extends AppCompatActivity
                     public void onClick(View v)
                     {
                         Intent intent = new Intent(CreatePasswordActivity.this, PickPasswordActivity.class);
-                        intent.putExtra("PasswordStrength", PasswordStrength.STRONG);
+                        intent.putExtra(Constants.CHOSEN_PW_STRENGTH, PasswordStrength.STRONG);
                         startActivity(intent);
                     }
                 });

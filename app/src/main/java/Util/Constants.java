@@ -17,6 +17,7 @@ public class Constants {
     public final static String MIDDLE = "password middle";
     public final static String STRONG = "password strong";
 
+    public final static String CHOSEN_PW_STRENGTH = "passwordStrength";
     public final static String CHOSEN_NUM = "chosenNum";
     public final static String CHOSEN_IMAGE = "chosenImage";
     public final static String CHOSEN_NAME = "chosenName";

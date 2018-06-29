@@ -32,7 +32,8 @@
         <activity android:name=".activities.PasswordDetailWebsitesActivity" />
         <activity android:name=".activities.PasswordDetailSettingsActivity" />
         <activity android:name=".activities.PickPasswordActivity" />
-        <activity android:name=".activities.CreatePWStep3Activity"></activity>
+        <activity android:name=".activities.CreatePWStep3Activity" />
+        <activity android:name=".activities.CreatePWStep1Activity"></activity>
     </application>
 
 </manifest>
