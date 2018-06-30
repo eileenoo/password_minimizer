@@ -26,6 +26,8 @@
     <string name="string_create_pw_choose_name">"Wähle einen Namen für dein Password aus."</string>
     <string name="string_create_pw_choose_image">"Wähle eine Bild für dein Password aus."</string>
     <string name="string_create_pw_choose_num">"Wähle eine Zahl für dein Password aus."</string>
+    <string name="string_confirm_pw_1">"Ziehe nun deine eben gewählte Zahl ("</string>
+    <string name="string_confirm_pw_2">") auf einen bestimmten Fleck im Bild."</string>
 
     <string name="string_create_pw_hint_name">Name des Passworts</string>
     <string name="string_btn_next">weiter</string>

@@ -29,7 +29,7 @@ public class CreatePWStep2Activity extends AppCompatActivity {
     private final static int READ_EXTERNAL_STORAGE_PERMISSION = 1000;
 
     Bitmap passwordImage;
-
+    private Uri pickedImageUri;
     private boolean isNextButtonEnabled;
     private Button nextButton;
     private ImageButton pickImageButton;
@@ -73,7 +73,7 @@ public class CreatePWStep2Activity extends AppCompatActivity {
             public void onClick(View view) {
                 if (passwordImage != null) {
                     Bundle bundle = getIntent().getExtras();
-                    bundle.putString(Constants.CHOSEN_IMAGE, String.valueOf(passwordImage));
+                    bundle.putParcelable(Constants.CHOSEN_IMAGE, pickedImageUri);
                     Intent intent = new Intent(CreatePWStep2Activity.this, CreatePWStep3Activity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
@@ -113,9 +113,9 @@ public class CreatePWStep2Activity extends AppCompatActivity {
 
         if (requestCode == SELECT_PHOTO && resultCode == RESULT_OK && data != null)
         {
-            Uri pickedImage = data.getData();
+            pickedImageUri = data.getData();
             String[] filePath = {MediaStore.Images.Media.DATA};
-            Cursor cursor = getContentResolver().query(pickedImage, filePath, null, null, null);
+            Cursor cursor = getContentResolver().query(pickedImageUri, filePath, null, null, null);
             cursor.moveToFirst();
             String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
 
