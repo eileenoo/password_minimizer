@@ -46,7 +46,7 @@ public class MainActivity extends BaseActivity {
         picturePasswordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                openPasswordDetailSettingsActivity();
+                openPasswordDetailWebsitesActivity();
             }
         });
 
@@ -83,8 +83,8 @@ public class MainActivity extends BaseActivity {
     /**
      * Redirects to activity, where the user can create a new picture password.
      */
-    private void openPasswordDetailSettingsActivity() {
-        Intent intent = new Intent(this, PasswordDetailSettingsActivity.class);
+    private void openPasswordDetailWebsitesActivity() {
+        Intent intent = new Intent(this, PasswordDetailWebsitesActivity.class);
         startActivity(intent);
     }
 

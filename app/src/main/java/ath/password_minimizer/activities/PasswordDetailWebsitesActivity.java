@@ -9,7 +9,7 @@ import android.view.MenuItem;
 
 import ath.password_minimizer.R;
 
-public class PasswordDetailWebsitesActivity extends AppCompatActivity {
+public class PasswordDetailWebsitesActivity extends BaseActivity {
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -34,6 +34,8 @@ public class PasswordDetailWebsitesActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_password_detail_websites);
+
+        initBurgerMenu();
 
         setNavigationBar();
     }
