@@ -69,7 +69,7 @@ public class CreatePWStep3Activity extends AppCompatActivity {
                 } else {
                     Bundle bundle = getIntent().getExtras();
                     bundle.putString(Constants.CHOSEN_NUM, chosenNumber);
-                    Intent intent = new Intent(CreatePWStep3Activity.this, PickPasswordActivity.class);
+                    Intent intent = new Intent(CreatePWStep3Activity.this, CreatePWStep4Activity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
                 }

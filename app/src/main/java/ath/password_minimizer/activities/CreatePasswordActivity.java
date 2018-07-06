@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.LinearLayout;
 
 import Util.Constants;
 import ath.password_minimizer.R;
@@ -51,7 +50,7 @@ public class CreatePasswordActivity extends AppCompatActivity
                     @Override
                     public void onClick(View v)
                     {
-                        Intent intent = new Intent(CreatePasswordActivity.this, PickPasswordActivity.class);
+                        Intent intent = new Intent(CreatePasswordActivity.this, CreatePWStep4Activity.class);
                         intent.putExtra(Constants.CHOSEN_PW_STRENGTH, PasswordStrength.STRONG);
                         startActivity(intent);
                     }
