@@ -20,6 +20,7 @@ import android.widget.TextView;
 
 import Util.Constants;
 import ath.password_minimizer.R;
+import model.PasswordManager;
 
 public class CreatePWStep4Activity extends AppCompatActivity implements View.OnTouchListener
 {
@@ -29,24 +30,21 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
     private float xDelta;
     private float yDelta;
     private float scale;
-
-    private final int[] numberIds = new int[] {R.drawable.number1, R.drawable.number2, R.drawable.number3,
-            R.drawable.number4, R.drawable.number5, R.drawable.number6, R.drawable.number7,
-            R.drawable.number8, R.drawable.number9};
+    private PasswordManager passwordManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_pwstep4);
+        passwordManager = new PasswordManager(this);
 
         root = (ViewGroup) findViewById(R.id.root);
-//        centerNumberView = findViewById(R.id.numberMatrix);
-//        backgroundNumberMatrixView = findViewById(R.id.numberMatrixBackground);
 
         this.scale = getResources().getDisplayMetrics().density;
 
         findViewById(R.id.numberGrid).setOnTouchListener(this);
+
     }
 
     @Override
@@ -60,7 +58,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
 
         Bitmap passwordImage = getPasswordImage(imageUri);
         setDataAndViewElements(passwordImage, chosenNumber);
-        createNumberMatrix();
+        passwordManager.generateSelectionNumberMatrix(Integer.parseInt(chosenNumber), (ImageView)findViewById(R.id.numberGrid));
     }
 
     private void setDataAndViewElements(Bitmap passwordImage, String chosenNumber)
@@ -89,87 +87,6 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
         return bitmap;
     }
 
-
-    private void createNumberMatrix()
-    {
-        int numbersPerRow = 17;
-        int numbersPerColumn = 25;
-
-        int pixelDim = BitmapFactory.decodeResource(getResources(),
-                R.drawable.number1).getWidth();
-
-        int[] numbers = new int[]
-                {   1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 1, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1,
-                    1, 2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1};
-
-        Bitmap numbersGrid = createNumberGridBitmap(numbersPerRow, numbersPerColumn, numbers, pixelDim);
-
-        ImageView numberGridView = findViewById(R.id.numberGrid);
-
-        numberGridView.setImageBitmap(numbersGrid);
-
-        float[] screenSize = getScreenSizeInDp();
-
-        ViewGroup.LayoutParams params2 = numberGridView.getLayoutParams();
-        params2.width = (int) (numbersPerRow * pixelDim * 2.0f * scale + 0.5f);
-        params2.height = (int) (numbersPerColumn * pixelDim * 2.0f * scale + 0.5f);
-
-        numberGridView.setTranslationX(-((numbersPerRow * pixelDim * (scale + 0.5f)) / 2.0f));
-        numberGridView.setTranslationY(-((numbersPerColumn * pixelDim * (scale + 0.5f)) / 2.0f));
-    }
-
-    private Bitmap createNumberGridBitmap(int numbersPerRow, int numbersPerColumn, int[] numbers, int numberImageDimensions)
-    {
-        Bitmap result = Bitmap.createBitmap(numberImageDimensions * numbersPerRow,
-                numberImageDimensions * numbersPerColumn, Bitmap.Config.ARGB_8888);
-
-        Canvas canvas = new Canvas(result);
-        Paint paint = new Paint();
-        for (int i = 0; i < numbers.length; i++)
-        {
-            Bitmap numberImg = BitmapFactory.decodeResource(getResources(),
-                    numberIds[numbers[i] - 1]);
-
-            canvas.drawBitmap(numberImg,
-                    numberImageDimensions * (i % numbersPerRow),
-                    numberImageDimensions * (i / numbersPerRow), paint);
-        }
-
-        return result;
-    }
-
-    private float[] getScreenSizeInDp()
-    {
-        DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float dpHeight = displayMetrics.heightPixels / displayMetrics.density;
-        float dpWidth = displayMetrics.widthPixels / displayMetrics.density;
-
-        return new float[]{dpWidth, dpHeight};
-    }
-
     public boolean onTouch(View view, MotionEvent event)
     {
         switch (event.getAction())
@@ -188,13 +105,6 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
                         .y(event.getRawY() + yDelta)
                         .setDuration(0)
                         .start();
-
-//                backgroundNumberMatrixView.animate()
-//                        .x(event.getRawX() + xDelta)
-//                        .y(event.getRawY() + yDelta)
-//                        .setDuration(0)
-//                        .start();
-
                 break;
             default:
                 return false;
