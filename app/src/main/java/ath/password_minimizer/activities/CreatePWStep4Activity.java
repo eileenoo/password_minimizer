@@ -3,24 +3,20 @@ package ath.password_minimizer.activities;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Canvas;
-import android.graphics.Paint;
-import android.media.Image;
 import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import Util.Constants;
 import ath.password_minimizer.R;
-import model.PasswordManager;
+import model.NumberGridGenerator;
+import model.Vector2;
 
 public class CreatePWStep4Activity extends AppCompatActivity implements View.OnTouchListener
 {
@@ -30,21 +26,24 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
     private float xDelta;
     private float yDelta;
     private float scale;
-    private PasswordManager passwordManager;
+    private NumberGridGenerator numberGridGenerator;
+
+    private Vector2 startPosition = new Vector2();
+    private Vector2 positionDifference = new Vector2();
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_pwstep4);
-        passwordManager = new PasswordManager(this);
+        numberGridGenerator = new NumberGridGenerator(this);
 
         root = (ViewGroup) findViewById(R.id.root);
 
         this.scale = getResources().getDisplayMetrics().density;
 
-        findViewById(R.id.numberGrid).setOnTouchListener(this);
-
+        ImageView numberGridView = findViewById(R.id.numberGrid);
+        numberGridView.setOnTouchListener(this);
     }
 
     @Override
@@ -58,7 +57,12 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
 
         Bitmap passwordImage = getPasswordImage(imageUri);
         setDataAndViewElements(passwordImage, chosenNumber);
-        passwordManager.generateSelectionNumberMatrix(Integer.parseInt(chosenNumber), (ImageView)findViewById(R.id.numberGrid));
+        numberGridGenerator.generateHighlightedNumberMatrix(Integer.parseInt(chosenNumber), (ImageView)findViewById(R.id.numberGrid));
+
+        ImageView numberGridView = findViewById(R.id.numberGrid);
+
+        startPosition.x = numberGridView.getX();
+        startPosition.y = numberGridView.getY();
     }
 
     private void setDataAndViewElements(Bitmap passwordImage, String chosenNumber)
@@ -91,20 +95,21 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
     {
         switch (event.getAction())
         {
-
             case MotionEvent.ACTION_DOWN:
-
                 xDelta = view.getX() - event.getRawX();
                 yDelta = view.getY() - event.getRawY();
                 break;
-
             case MotionEvent.ACTION_MOVE:
-
                 view.animate()
                         .x(event.getRawX() + xDelta)
                         .y(event.getRawY() + yDelta)
                         .setDuration(0)
                         .start();
+                break;
+            case MotionEvent.ACTION_UP:
+                positionDifference.x = view.getX() - startPosition.x;
+                positionDifference.y = view.getY() - startPosition.y;
+                findViewById(R.id.numberGrid).setOnTouchListener(null);
                 break;
             default:
                 return false;
