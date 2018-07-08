@@ -21,4 +21,7 @@ public class Constants {
     public final static String CHOSEN_NUM = "chosenNum";
     public final static String CHOSEN_IMAGE = "chosenImage";
     public final static String CHOSEN_NAME = "chosenName";
+
+    public final static String PASSWORD_NUM_POS_X = "passwordNumPosX";
+    public final static String PASSWORD_NUM_POS_Y = "passwordNumPosY";
 }

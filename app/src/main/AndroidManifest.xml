@@ -34,7 +34,8 @@
         <activity android:name=".activities.CreatePWStep4Activity" />
         <activity android:name=".activities.CreatePWStep3Activity" />
         <activity android:name=".activities.CreatePWStep1Activity" />
-        <activity android:name=".activities.CreatePWStep2Activity"></activity>
+        <activity android:name=".activities.CreatePWStep2Activity" />
+        <activity android:name=".activities.CreatePWStep5Activity"></activity>
     </application>
 
 </manifest>
