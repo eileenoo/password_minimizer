@@ -56,8 +56,8 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
 
         Bitmap passwordImage = getPasswordImage(imageUri);
         setDataAndViewElements(passwordImage);
-        numberGridGenerator.generateHighlightedNumberMatrix(Integer.parseInt(chosenNumber),
-                (ImageView)findViewById(R.id.numberGrid), (ImageView)findViewById(R.id.passwordImageContainer));
+        numberGridGenerator.generateNumberMatrix(Integer.parseInt(chosenNumber),
+                (ImageView)findViewById(R.id.numberGrid), true);
 
         ImageView numberGridView = findViewById(R.id.numberGrid);
 
@@ -125,7 +125,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
     private float[] getAvailableScreenSizeInDp()
     {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
-        float dpHeight = PixelConverter.convertPixelsToDp(displayMetrics.heightPixels, this);
+        float dpHeight = PixelConverter.convertPixelsToDp(displayMetrics.heightPixels - getStatusBarHeight(), this);
         float dpWidth = PixelConverter.convertPixelsToDp(displayMetrics.widthPixels, this);
 
         return new float[]{dpWidth, dpHeight};
@@ -172,7 +172,5 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
         }
 
         return actionBarHeight + statusBarHeight;
-
     }
-
 }

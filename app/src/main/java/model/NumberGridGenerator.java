@@ -30,7 +30,7 @@ public class NumberGridGenerator
     private final int numbersPerRow = 17;
     private final int numbersPerColumn = 25;
 
-    private final float errorThresholdDp = 20.0f;
+    private final float errorThresholdDp = 5.0f;
     private final int bitmapScaleFactor = 4;
     private int topBarHeightPx;
 
@@ -89,13 +89,25 @@ public class NumberGridGenerator
         return result;
     }
 
-    public int[] generateHighlightedNumberMatrix(int passwordNumber, ImageView numberGridImageView, ImageView backgroundImageView)
+    public int[] generateNumberMatrix(int passwordNumber, ImageView numberGridImageView, boolean forSelection)
     {
-        int[] numbers = getRandomNumbers(numbersPerRow * numbersPerColumn, passwordNumber);
+        int pixelDim = BitmapFactory.decodeResource(context.getResources(),
+                R.drawable.number1).getWidth();
+
+        int[] numbers;
+
+        if (forSelection)
+        {
+            numbers = getRandomNumbers(numbersPerRow * numbersPerColumn, passwordNumber);
+        }
+        else
+        {
+            numbers = getRandomNumbers(numbersPerRow * numbersPerColumn);
+        }
 
         numbers[((numbersPerRow * numbersPerColumn) - 1) / 2] = passwordNumber;
 
-        Bitmap numbersGrid = createNumberGridBitmap(numbersPerRow, numbersPerColumn, numbers, pixelDim, true);
+        Bitmap numbersGrid = createNumberGridBitmap(numbersPerRow, numbersPerColumn, numbers, pixelDim, forSelection);
 
         numberGridImageView.setImageBitmap(numbersGrid);
 
@@ -104,35 +116,11 @@ public class NumberGridGenerator
         params2.width = numbersPerRow * pixelDim * bitmapScaleFactor;
         params2.height = numbersPerColumn * pixelDim * bitmapScaleFactor;
 
-        float[] screenSize = getScreenSize(backgroundImageView);
+        float[] screenSize = getScreenSize();
         screenSize[1] = screenSize[1] - topBarHeightPx;
 
         numberGridImageView.setTranslationX(-((screenSize[0] / 2) + ((params2.width / 2) - screenSize[0])));
         numberGridImageView.setTranslationY(-((screenSize[1] / 2) + ((params2.height / 2) - screenSize[1])));
-
-
-        return numbers;
-    }
-
-    public int[] generateNumberMatrix(int passwordNumber, ImageView numberGridImageView, ImageView backgroundImageView)
-    {
-        int pixelDim = BitmapFactory.decodeResource(context.getResources(),
-                R.drawable.number1).getWidth();
-
-        int[] numbers = getRandomNumbers(numbersPerRow * numbersPerColumn);
-
-        numbers[((numbersPerRow * numbersPerColumn) - 1) / 2] = passwordNumber;
-
-        Bitmap numbersGrid = createNumberGridBitmap(numbersPerRow, numbersPerColumn, numbers, pixelDim, false);
-
-        numberGridImageView.setImageBitmap(numbersGrid);
-
-        ViewGroup.LayoutParams params2 = numberGridImageView.getLayoutParams();
-        params2.width = (int) (numbersPerRow * pixelDim * 2.0f * scale + 0.5f);
-        params2.height = (int) (numbersPerColumn * pixelDim * 2.0f * scale + 0.5f);
-
-        numberGridImageView.setTranslationX(-((numbersPerRow * pixelDim * (scale + 0.5f)) / 2.0f));
-        numberGridImageView.setTranslationY(-((numbersPerColumn * pixelDim * (scale + 0.5f)) / 2.0f));
 
         return numbers;
     }
@@ -170,7 +158,7 @@ public class NumberGridGenerator
         return numbers;
     }
 
-    private float[] getScreenSize(ImageView backgroundImageView)
+    private float[] getScreenSize()
     {
         DisplayMetrics displayMetrics = context.getResources().getDisplayMetrics();
         float pxHeight = displayMetrics.heightPixels;
@@ -182,8 +170,14 @@ public class NumberGridGenerator
     public boolean isAnyNumberInGridOnPosition(int passwordNumber, int[] numberGrid,
                                                Vector2 numberGridTranslationDp, Vector2 positionDp)
     {
-        float leftPosOffsetDp = -((numbersPerRow * pixelDim * (scale + 0.5f)) / 2.0f);
-        float topPosOffsetDp = -((numbersPerColumn * pixelDim * (scale + 0.5f)) / 2.0f);
+        float[] screenSize = getScreenSize();
+        screenSize[1] = screenSize[1] - topBarHeightPx;
+
+        float leftPosOffsetDp = -((screenSize[0] / 2) + (((numbersPerRow * pixelDim * bitmapScaleFactor) / 2) - screenSize[0]));
+        float topPosOffsetDp = -((screenSize[1] / 2) + (((numbersPerColumn * pixelDim * bitmapScaleFactor) / 2) - screenSize[1]));
+
+        leftPosOffsetDp = PixelConverter.convertPixelsToDp(leftPosOffsetDp, context);
+        topPosOffsetDp = PixelConverter.convertPixelsToDp(topPosOffsetDp, context);
 
         for (int i = 0; i < numberGrid.length; i++)
         {
@@ -193,8 +187,11 @@ public class NumberGridGenerator
                 int rowIndex = (i / numbersPerRow);
 
                 Vector2 centeredPositionDp = new Vector2();
-                centeredPositionDp.x = ((columnIndex * pixelDim) + ((pixelDim) / 2.0f));
-                centeredPositionDp.y = ((rowIndex * pixelDim) + ((pixelDim) / 2.0f));
+                centeredPositionDp.x = (columnIndex * pixelDim * bitmapScaleFactor) + ((pixelDim * bitmapScaleFactor) / 2.0f);
+                centeredPositionDp.y = (rowIndex * pixelDim * bitmapScaleFactor) + ((pixelDim * bitmapScaleFactor) / 2.0f);
+
+                centeredPositionDp.x = PixelConverter.convertPixelsToDp(centeredPositionDp.x, context);
+                centeredPositionDp.y = PixelConverter.convertPixelsToDp(centeredPositionDp.y, context);
 
                 centeredPositionDp.x += leftPosOffsetDp;
                 centeredPositionDp.y += topPosOffsetDp;
@@ -205,10 +202,11 @@ public class NumberGridGenerator
                 translatedPositionDp.y = centeredPositionDp.y + numberGridTranslationDp.y;
 
                 float differenceDp = getVector2Difference(translatedPositionDp, positionDp);
-                Log.d("TEST", "difference " + columnIndex + ", " + rowIndex + " : " + String.valueOf(differenceDp));
+                //Log.d("TEST", "difference " + columnIndex + ", " + rowIndex + " : " + String.valueOf(differenceDp));
 
                 if (differenceDp < errorThresholdDp)
                 {
+                    Log.d("CORRECT", columnIndex + ", " + rowIndex);
                     return true;
                 }
             }
@@ -220,7 +218,7 @@ public class NumberGridGenerator
     private float getVector2Difference(Vector2 v1, Vector2 v2)
     {
         float x = Math.abs(v1.x - v2.x);
-        float y = Math.abs(v2.y - v2.y);
+        float y = Math.abs(v1.y - v2.y);
 
         return x + y;
     }

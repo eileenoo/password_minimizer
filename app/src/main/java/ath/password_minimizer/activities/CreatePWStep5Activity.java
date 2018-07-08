@@ -4,10 +4,12 @@ import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
+import android.os.Build;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
@@ -36,7 +38,7 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_pwstep5);
-        numberGridGenerator = new NumberGridGenerator(this, 5);
+        numberGridGenerator = new NumberGridGenerator(this, getStatusBarHeight());
 
         this.scale = getResources().getDisplayMetrics().density;
 
@@ -56,7 +58,7 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         Bitmap passwordImage = getPasswordImage(imageUri);
         setDataAndViewElements(passwordImage);
         numberGrid = numberGridGenerator.generateNumberMatrix(Integer.parseInt(chosenNumber),
-                (ImageView)findViewById(R.id.numberGrid), (ImageView)findViewById(R.id.passwordImageContainer));
+                (ImageView)findViewById(R.id.numberGrid), false);
 
         ImageView numberGridView = findViewById(R.id.numberGrid);
 
@@ -134,6 +136,30 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         boolean isCorrect = numberGridGenerator.isAnyNumberInGridOnPosition(Integer.parseInt(chosenNumber),
                 numberGrid, positionDifferenceDp, positionDp);
 
-        Log.d("TEST", String.valueOf(isCorrect));
+        Log.d("Is Correct: ", String.valueOf(isCorrect));
+    }
+
+    public int getStatusBarHeight()
+    {
+        int actionBarHeight = 0;
+        int statusBarHeight;
+
+        // Calculate ActionBar height
+        TypedValue tv = new TypedValue();
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
+        {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+        }
+
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
+            statusBarHeight = (int)PixelConverter.convertDpToPixel(24, this);
+        }
+        else
+        {
+            statusBarHeight = (int)PixelConverter.convertDpToPixel(25, this);
+        }
+
+        return actionBarHeight + statusBarHeight;
     }
 }
