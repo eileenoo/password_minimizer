@@ -165,7 +165,7 @@ public class StartPinActivity extends AppCompatActivity {
         if (enteredPin.equals(correctPin)) {
             pinCorrectAction();
         } else if (enteredPin.equals(restartPin)) {
-            restartApplication();
+            resetApplication();
         } else {
             pinIncorrectAction();
         }
@@ -185,7 +185,6 @@ public class StartPinActivity extends AppCompatActivity {
      * This happens when the entered pin is incorrect.
      */
     private void pinIncorrectAction() {
-        System.out.println("pin incorrect action");
         showNewDialog(Constants.PIN_INCORRECT, new DialogInterface.OnDismissListener() {
             @Override
             public void onDismiss(DialogInterface dialogInterface) {
@@ -200,7 +199,8 @@ public class StartPinActivity extends AppCompatActivity {
      * Resets whole application.
      * Deletes created passwords ...
      */
-    private void restartApplication() {
+    private void resetApplication() {
+        Constants.removeAllPicturePasswords(this);
         resetPinFieldsAndEnableButtons();
         requestOutlineFocus(pinFields[0]);
     }
@@ -209,7 +209,6 @@ public class StartPinActivity extends AppCompatActivity {
      * Resets all pin fields.
      */
     private void resetPinFieldsAndEnableButtons() {
-        System.out.println("reset pinfields");
         counter = 0;
         for (TextView pinField : pinFields) {
             pinField.setText("");
@@ -218,7 +217,6 @@ public class StartPinActivity extends AppCompatActivity {
     }
 
     private void showNewDialog(String dialog, DialogInterface.OnDismissListener dismissAction) {
-        System.out.println("___________________________");
         new AlertDialog.Builder(StartPinActivity.this)
                 .setMessage(dialog)
                 .setOnDismissListener(dismissAction)

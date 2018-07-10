@@ -1,7 +1,6 @@
 package ath.password_minimizer.activities;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -136,7 +135,8 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         Log.d("Is Correct: ", String.valueOf(isCorrect));
 
         if (isCorrect) {
-            savePasswordToHardwareDevice();
+            PicturePassword newPicturePassword = createPicturePassword();
+            saveNewPicturePassword(newPicturePassword);
             Intent intent = new Intent(this, MainActivity.class);
             startActivity(intent);
             finish();
@@ -162,7 +162,13 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         return actionBarHeight + statusBarHeight;
     }
 
-    public void savePasswordToHardwareDevice() {
+    public void saveNewPicturePassword(PicturePassword newPicturePassword) {
+        String currentJsonPicturePasswordList = Constants.getJsonPicturePWList(this);
+        String newPicturePasswordList = Constants.getJsonPicturePWListWithNewlyAddedPW(currentJsonPicturePasswordList, newPicturePassword);
+        Constants.savePicturePWListToSharedPreferences(newPicturePasswordList, this);
+    }
+
+    private PicturePassword createPicturePassword() {
         Bundle bundle = getIntent().getExtras();
         PasswordStrength pwStrength = (PasswordStrength) bundle.get(Constants.CHOSEN_PW_STRENGTH);
         String pwName = bundle.getString(Constants.CHOSEN_NAME);
@@ -171,10 +177,6 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         float pwPosX = bundle.getFloat(Constants.PASSWORD_NUM_POS_X);
         float pwPosY = bundle.getFloat(Constants.PASSWORD_NUM_POS_Y);
 
-        PicturePassword newPicturePassword = new PicturePassword(pwStrength, pwName, imageUri, pwNum, pwPosX, pwPosY);
-
-        String currentJsonPicturePasswordList = Constants.getPicturePWListFromSharedPreferences(this);
-        String newPicturePasswordList = newPicturePassword.getJsonPicturePasswordList(currentJsonPicturePasswordList, newPicturePassword);
-        Constants.savePicturePWListToSharedPreferences(newPicturePasswordList, this);
+        return new PicturePassword(pwStrength, pwName, imageUri, pwNum, pwPosX, pwPosY);
     }
 }

@@ -81,42 +81,6 @@ public class PicturePassword {
         this.numPosY = numPosY;
     }
 
-    /**
-     * Get a jSon object filled with the list of picture passwords.
-     * Converts jSon (containing list of picture passwords) to object of list of picture passwords.
-     * Adds the new picture password and returns jSon of new list of picture passwords.
-     *
-     * @param jSonPicturePasswordList current list of picture passwords as json.
-     * @param newPicturePassword      new picture password, that needs to be saved
-     */
-    public String getJsonPicturePasswordList(String jSonPicturePasswordList, PicturePassword newPicturePassword) {
-        Gson gson = new Gson();
-        List<PicturePassword> picturePasswordList;
-        if (!jSonPicturePasswordList.equals("")) {
-            Type picturePasswordListType = new TypeToken<ArrayList<PicturePassword>>() {
-            }.getType();
-            picturePasswordList = gson.fromJson(jSonPicturePasswordList, picturePasswordListType);
-        } else  {
-            picturePasswordList = new ArrayList<>();
-        }
-        picturePasswordList.add(newPicturePassword);
-        return gson.toJson(picturePasswordList);
-    }
-
-    /**
-     * Returns the list of all saved picture passwords.
-     * This will be needed to display the list of passwords in the main activity.
-     *
-     * @param jsonPicturePasswordList List of picture passwords from shared preferences.
-     */
-    public List<PicturePassword> getPicturePasswordList(String jsonPicturePasswordList) {
-        Gson gson = new Gson();
-        Type picturePasswordListType = new TypeToken<ArrayList<PicturePassword>>() {
-        }.getType();
-        List<PicturePassword> picturePasswordList = gson.fromJson(jsonPicturePasswordList, picturePasswordListType);
-        return picturePasswordList;
-    }
-
     public void addWebsite(WebsiteCredentials websiteCredentials) {
         if (getWebsiteByName(websiteCredentials.getName()) == -1) {
             websites.add(websiteCredentials);

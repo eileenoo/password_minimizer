@@ -55,7 +55,7 @@ public class PasswordListAdapter extends BaseAdapter {
 
         //TODO: set resource with real image path here
         //passwordImageView.setImageResource( mPicturePasswordItems.get(position).imagePath);
-        passwordNameView.setText( mPicturePasswordItems.get(position).passwordName );
+        passwordNameView.setText( mPicturePasswordItems.get(position).getPasswordName());
 
         return view;
     }
