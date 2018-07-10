@@ -9,6 +9,9 @@ import Util.Constants;
 import ath.password_minimizer.R;
 import model.PasswordStrength;
 
+/**
+ * User chooses password strength.
+ */
 public class CreatePasswordActivity extends AppCompatActivity
 {
 

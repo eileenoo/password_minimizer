@@ -1,6 +1,5 @@
 package ath.password_minimizer.activities;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
@@ -51,7 +50,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
         super.onResume();
 
         Bundle bundle = getIntent().getExtras();
-        Uri imageUri = (Uri) bundle.get(Constants.CHOSEN_IMAGE);
+        Uri imageUri = Uri.parse(bundle.getString(Constants.CHOSEN_IMAGE_URI));
         String chosenNumber = (String) bundle.get(Constants.CHOSEN_NUM);
 
         Bitmap passwordImage = getPasswordImage(imageUri);

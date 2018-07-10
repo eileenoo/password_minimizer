@@ -73,7 +73,7 @@ public class CreatePWStep2Activity extends AppCompatActivity {
             public void onClick(View view) {
                 if (passwordImage != null) {
                     Bundle bundle = getIntent().getExtras();
-                    bundle.putParcelable(Constants.CHOSEN_IMAGE, pickedImageUri);
+                    bundle.putString(Constants.CHOSEN_IMAGE_URI, pickedImageUri.toString());
                     Intent intent = new Intent(CreatePWStep2Activity.this, CreatePWStep3Activity.class);
                     intent.putExtras(bundle);
                     startActivity(intent);
