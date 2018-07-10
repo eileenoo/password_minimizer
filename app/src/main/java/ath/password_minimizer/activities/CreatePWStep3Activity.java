@@ -5,6 +5,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -19,7 +20,7 @@ public class CreatePWStep3Activity extends AppCompatActivity {
 
     private String chosenNumber;
     private boolean isNextButtonEnabled;
-    private Button btnNum0, btnNum1, btnNum2, btnNum3, btnNum4, btnNum5, btnNum6, btnNum7, btnNum8, btnNum9, nextButton;
+    private Button btnNum1, btnNum2, btnNum3, btnNum4, btnNum5, btnNum6, btnNum7, btnNum8, btnNum9, nextButton;
     private ArrayList<Button> numButtons;
 
     @Override
@@ -55,9 +56,8 @@ public class CreatePWStep3Activity extends AppCompatActivity {
         btnNum7 = findViewById(R.id.num_7);
         btnNum8 = findViewById(R.id.num_8);
         btnNum9 = findViewById(R.id.num_9);
-        btnNum0 = findViewById(R.id.num_0);
         numButtons = new ArrayList<>();
-        Collections.addAll(numButtons, btnNum0, btnNum1, btnNum2, btnNum3, btnNum4, btnNum5, btnNum6, btnNum7, btnNum8, btnNum9);
+        Collections.addAll(numButtons, btnNum1, btnNum2, btnNum3, btnNum4, btnNum5, btnNum6, btnNum7, btnNum8, btnNum9);
     }
 
     private void setOnClickListener() {
@@ -65,9 +65,10 @@ public class CreatePWStep3Activity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if (chosenNumber == null) {
-                    // Set error message
+                    Toast.makeText(CreatePWStep3Activity.this, Constants.TOAST_ERROR_CHOOSE_IMAGE, Toast.LENGTH_SHORT).show();
                 } else {
                     Bundle bundle = getIntent().getExtras();
+                    assert bundle != null;
                     bundle.putString(Constants.CHOSEN_NUM, chosenNumber);
                     Intent intent = new Intent(CreatePWStep3Activity.this, CreatePWStep4Activity.class);
                     intent.putExtras(bundle);

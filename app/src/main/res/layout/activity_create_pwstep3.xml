@@ -27,7 +27,7 @@
         android:alignmentMode="alignBounds"
         android:columnCount="3"
         android:orientation="horizontal"
-        android:rowCount="4"
+        android:rowCount="3"
         android:rowOrderPreserved="false">
 
         <Button
@@ -155,22 +155,6 @@
             android:tag="@string/string_pin_9"
             android:text="@string/string_pin_9"
             android:textColor="@color/color_button_pin_text" />
-
-
-        <Button
-            android:id="@+id/num_0"
-            android:layout_column="1"
-            android:layout_columnWeight="1"
-            android:layout_gravity="fill_horizontal"
-            android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
-            android:layout_row="3"
-            android:layout_rowWeight="1"
-            android:background="@drawable/num_button_background"
-            android:gravity="center"
-            android:tag="@string/string_pin_0"
-            android:text="@string/string_pin_0"
-            android:textColor="@color/color_button_pin_text" />
-
 
     </GridLayout>
 

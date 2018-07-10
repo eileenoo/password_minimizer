@@ -9,6 +9,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
 
 import Util.Constants;
 import ath.password_minimizer.R;
@@ -82,7 +83,7 @@ public class CreatePWStep1Activity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else {
-                    // set Error message
+                    pwNameField.setError(Constants.ERROR_EMPTY_PIN_NAME);
                 }
             }
         });

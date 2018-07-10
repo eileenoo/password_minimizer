@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import Util.Constants;
 import ath.password_minimizer.R;
@@ -78,7 +79,7 @@ public class CreatePWStep2Activity extends AppCompatActivity {
                     intent.putExtras(bundle);
                     startActivity(intent);
                 } else {
-                    // set Error message
+                    Toast.makeText(CreatePWStep2Activity.this, Constants.TOAST_ERROR_CHOOSE_IMAGE, Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -126,10 +127,8 @@ public class CreatePWStep2Activity extends AppCompatActivity {
             pickedImageView.setVisibility(View.VISIBLE);
             pickImageButton.setVisibility(View.GONE);
 
-            // Do something with the bitmap
             passwordImage = bitmap;
 
-            // At the end remember to close the cursor or you will end with the RuntimeException!
             cursor.close();
             isNextButtonEnabled = true;
             setNextButtonClickableStatus();

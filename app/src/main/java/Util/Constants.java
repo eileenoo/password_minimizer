@@ -25,7 +25,10 @@ public class Constants {
     public final static String PIN_INCORRECT = "Der eingegebene Pin ist nicht korrekt.";
     public final static String PIN_HELP_DIALOG = "Wenn du den Pin vergessen hast, kann ich dir nicht helfen";
     public final static String PIN_HELP_DIALOG_BUTTON = "Alles klar.";
+    public final static String PIN_RESET_DIALOG = "Alle Passwörter wurden gelöscht.";
 
+    public final static String ERROR_EMPTY_PIN_NAME = "Bitte gib einen Namen für das Passwort ein.";
+    public final static String TOAST_ERROR_CHOOSE_IMAGE = "Bitte wähle ein Bild für dein Passwort aus.";
 
     public final static String SIMPLE = "password simple";
     public final static String MIDDLE = "password middle";

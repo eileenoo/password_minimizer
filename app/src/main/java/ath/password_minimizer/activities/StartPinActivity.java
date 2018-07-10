@@ -67,7 +67,7 @@ public class StartPinActivity extends AppCompatActivity {
     }
 
     private void requestOutlineFocus(TextView pinField) {
-        for (TextView pinEntryField: pinFields) {
+        for (TextView pinEntryField : pinFields) {
             if (pinEntryField.equals(pinField)) {
                 pinEntryField.setBackground(getResources().getDrawable(R.drawable.pin_entry_background_focused));
             } else {
@@ -190,19 +190,22 @@ public class StartPinActivity extends AppCompatActivity {
             public void onDismiss(DialogInterface dialogInterface) {
                 resetPinFieldsAndEnableButtons();
                 requestOutlineFocus(pinFields[0]);
-                System.out.println("dismiss");
             }
         });
     }
 
     /**
-     * Resets whole application.
-     * Deletes created passwords ...
+     * Deletes created passwords.
      */
     private void resetApplication() {
         Constants.removeAllPicturePasswords(this);
-        resetPinFieldsAndEnableButtons();
-        requestOutlineFocus(pinFields[0]);
+        showNewDialog(Constants.PIN_RESET_DIALOG, new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
+                resetPinFieldsAndEnableButtons();
+                requestOutlineFocus(pinFields[0]);
+            }
+        });
     }
 
     /**
