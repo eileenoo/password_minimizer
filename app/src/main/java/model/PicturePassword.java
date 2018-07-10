@@ -1,10 +1,10 @@
 package model;
 
+import java.util.ArrayList;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -19,10 +19,8 @@ public class PicturePassword {
     private String passwordNumber;
     private float numPosX;
     private float numPosY;
+    public ArrayList<WebsiteCredentials> websites;
 
-    public PicturePassword() {
-
-    }
 
     public PicturePassword(PasswordStrength passwordStrength, String passwordName, String imageUri, String passwordNumber, float numPosX, float numPosY) {
 
@@ -32,6 +30,7 @@ public class PicturePassword {
         this.passwordNumber = passwordNumber;
         this.numPosX = numPosX;
         this.numPosY = numPosY;
+        this.websites = new ArrayList<>();
     }
 
     public PasswordStrength getPasswordStrength() {
@@ -118,4 +117,26 @@ public class PicturePassword {
         return picturePasswordList;
     }
 
+    public void addWebsite(WebsiteCredentials websiteCredentials) {
+        if (getWebsiteByName(websiteCredentials.getName()) == -1) {
+            websites.add(websiteCredentials);
+        }
+    }
+
+    public void removeWebsite(WebsiteCredentials websiteCredentials) {
+        int websiteIndex = getWebsiteByName(websiteCredentials.getName());
+        if (websiteIndex != -1) {
+            websites.remove(websiteIndex);
+        }
+    }
+
+    public int getWebsiteByName(String name) {
+        for (int i = 0; i < websites.size(); i++) {
+            if (websites.get(i).getName() == name) {
+                return i;
+            }
+        }
+
+        return -1;
+    }
 }

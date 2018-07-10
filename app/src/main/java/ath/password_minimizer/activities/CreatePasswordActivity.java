@@ -12,8 +12,7 @@ import model.PasswordStrength;
 /**
  * User chooses password strength.
  */
-public class CreatePasswordActivity extends AppCompatActivity
-{
+public class CreatePasswordActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -22,6 +21,9 @@ public class CreatePasswordActivity extends AppCompatActivity
         setContentView(R.layout.activity_create_password);
 
         setupOnClickEvents();
+        //TODO: check which password types already exist and show here only the possible ones
+
+        initBurgerMenu();
     }
 
     private void setupOnClickEvents()

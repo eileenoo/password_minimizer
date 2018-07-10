@@ -1,39 +1,69 @@
 package ath.password_minimizer.activities;
 
-import android.app.ActivityManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.ListView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import Util.Constants;
 import ath.password_minimizer.R;
+import listAdapters.PasswordListAdapter;
+import model.PasswordStrength;
 import model.PicturePassword;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends BaseActivity {
 
-    private List<PicturePassword> picturePasswordsList;
-    private boolean userHasPasswords;
+    boolean userHasPasswords;
+    ArrayList<PicturePassword> picturePasswords;
+    ListView picturePasswordListView;
+    private static PasswordListAdapter passwordListAdapter;
+    ImageButton addPasswordButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        picturePasswordsList = new ArrayList<>();
         userHasPasswords = checkIfUserHasPasswords();
-        Button btn = findViewById(R.id.add_btn);
-        btn.setOnClickListener(new View.OnClickListener() {
+
+        initBurgerMenu();
+
+        picturePasswordListView = (ListView) findViewById(R.id.password_list);
+
+        // TODO: save data somewhere else and remove dummy data here
+        picturePasswords = new ArrayList<>();
+        picturePasswords.add(new PicturePassword(PasswordStrength.SIMPLE, "Einfaches Passwort", "xxx/yy/abc.png", "3", 3, 4));
+        picturePasswords.add(new PicturePassword(PasswordStrength.SIMPLE, "Einfaches Passwort", "xxx/yy/abc.png", "3", 3, 4));
+
+        passwordListAdapter = new PasswordListAdapter(picturePasswords, getApplicationContext());
+
+        picturePasswordListView.setAdapter(passwordListAdapter);
+
+        picturePasswordListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                openPasswordDetailWebsitesActivity();
+            }
+        });
+
+        addPasswordButton = (ImageButton) findViewById(R.id.addPasswordButton);
+        addPasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
                 openCreatePasswordActivity();
             }
         });
+
+        if (picturePasswords.size() >= 3) {
+            addPasswordButton.setVisibility(View.INVISIBLE);
+        }
     }
 
     /**
@@ -43,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private boolean checkIfUserHasPasswords() {
         SharedPreferences sharedPreferences = this.getSharedPreferences(Constants.SHARED_PREFERENCES_PASSWORD_MINIMIZER, MODE_PRIVATE);
-        String jSonListOfPWFromSharedPreferences = sharedPreferences.getString(Constants.LIST_PICTURE_PASSWORDS,"");
+        String jSonListOfPWFromSharedPreferences = sharedPreferences.getString(Constants.LIST_PICTURE_PASSWORDS, "");
         System.out.println(jSonListOfPWFromSharedPreferences);
         return false;
     }
@@ -53,6 +83,14 @@ public class MainActivity extends AppCompatActivity {
      */
     private void openCreatePasswordActivity() {
         Intent intent = new Intent(this, CreatePasswordActivity.class);
+        startActivity(intent);
+    }
+
+    /**
+     * Redirects to activity, where the user can create a new picture password.
+     */
+    private void openPasswordDetailWebsitesActivity() {
+        Intent intent = new Intent(this, PasswordDetailWebsitesActivity.class);
         startActivity(intent);
     }
 
