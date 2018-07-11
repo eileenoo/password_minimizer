@@ -17,7 +17,9 @@ import android.view.Window;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
 import Util.Constants;
 import Util.PixelConverter;
@@ -104,14 +106,13 @@ public class NumberGridGenerator
         if (forSelection)
         {
             numbers = getRandomNumbers(numbersPerRow * numbersPerColumn, passwordNumber);
+            numbers[((numbersPerRow * numbersPerColumn) - 1) / 2] = passwordNumber;
         }
         else
         {
-            numbers = getRandomNumbers(numbersPerRow * numbersPerColumn);
+            numbers = getEvenlyDistributedRandomNumbers(numbersPerRow * numbersPerColumn);
         }
-
-        numbers[((numbersPerRow * numbersPerColumn) - 1) / 2] = passwordNumber;
-
+        
         Bitmap numbersGrid = createNumberGridBitmap(numbersPerRow, numbersPerColumn, numbers, pixelDim, forSelection);
 
         numberGridImageView.setImageBitmap(numbersGrid);
@@ -158,6 +159,35 @@ public class NumberGridGenerator
         for (int i = 0; i < numbers.length; i++)
         {
             numbers[i] = random.nextInt(10 - 1) + 1;
+        }
+
+        return numbers;
+    }
+
+    private int[] getEvenlyDistributedRandomNumbers(int count)
+    {
+        int[] numbers = new int[count];
+
+        int rest = count % 9;
+        int countNoRest = count - rest;
+        int chunkCount = countNoRest / 9;
+
+        for (int i = 0; i < chunkCount; i++)
+        {
+            int[] numberChunk = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+            shuffleArray(numberChunk);
+
+            for (int j = i * 9; j < (i * 9) + 9; j++)
+            {
+                numbers[j] = numberChunk[j - (i * 9)];
+            }
+        }
+
+        int[] randomRestNumbers = getRandomNumbers(rest);
+
+        for (int i = count - rest; i < count; i++)
+        {
+            numbers[i] = randomRestNumbers[i - (count - rest)];
         }
 
         return numbers;
@@ -234,5 +264,19 @@ public class NumberGridGenerator
         float y = Math.abs(v1.y - v2.y);
 
         return x + y;
+    }
+
+    // Implementing Fisher–Yates shuffle
+    private void shuffleArray(int[] ar)
+    {
+        Random rnd = new Random();
+        for (int i = ar.length - 1; i > 0; i--)
+        {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            int a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
     }
 }
