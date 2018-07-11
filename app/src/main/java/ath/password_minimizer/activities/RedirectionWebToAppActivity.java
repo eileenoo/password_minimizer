@@ -1,5 +1,7 @@
 package ath.password_minimizer.activities;
 
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +15,8 @@ import model.PicturePassword;
 
 public class RedirectionWebToAppActivity extends AppCompatActivity {
 
+    private Uri uriWebsite;
+    private PicturePassword currentPicturePassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -20,7 +24,8 @@ public class RedirectionWebToAppActivity extends AppCompatActivity {
         setContentView(R.layout.activity_redirection_web_to_app);
 
         List<String> path = getIntent().getData().getPathSegments();
-        Uri uri = Uri.parse(path.get(1));
+        uriWebsite = getIntent().getData();
+        Uri uri = Uri.parse(path.get(2));
         PasswordStrength correctPassWordStrength;
 
         switch (uri.toString()) {
@@ -37,7 +42,11 @@ public class RedirectionWebToAppActivity extends AppCompatActivity {
                 correctPassWordStrength = PasswordStrength.SIMPLE;
                 break;
         }
-        displayCorrectPicturePassword(getAccordingPicturePassword(correctPassWordStrength));
+        //Show dialog and tell user to enter correct pw
+        Constants.showNewDialogOkButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ENTER_PW_DIALOG, Constants.REDIRECT_BUTTON_OK, null);
+
+        getAccordingPicturePassword(correctPassWordStrength);
+        displayCorrectPicturePassword();
     }
 
     /**
@@ -46,37 +55,61 @@ public class RedirectionWebToAppActivity extends AppCompatActivity {
      * @param passwordStrength passed by website.
      * @return first picture pw with the according pw strength.
      */
-    private PicturePassword getAccordingPicturePassword(PasswordStrength passwordStrength) {
+    private void getAccordingPicturePassword(PasswordStrength passwordStrength) {
         PicturePassword picturePasswordToShow = null;
         for (PicturePassword picturePassword : Constants.getCurrentPicturePasswordList(this)) {
             if (picturePassword.getPasswordStrength() == passwordStrength) {
                 picturePasswordToShow = picturePassword;
             }
         }
-        return picturePasswordToShow;
     }
 
     /**
      * Displays a picture password, which the user needs to unlock.
-     *
-     * @param currentPicturePassword the picture password which should be shown to the user.
      */
-    private void displayCorrectPicturePassword(PicturePassword currentPicturePassword) {
-        Constants.showNewDialogOkButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ENTER_PW_DIALOG, Constants.REDIRECT_BUTTON_OK, null);
+    private void displayCorrectPicturePassword() {
+        //TODO: show correct pw
+        pwCorrectAction();
+    }
+
+
+    private void pwCorrectAction() {
+        backToBrowser(true);
     }
 
     /**
-     * Redirect to website.
-     * Username and password should be shown in website.
+     * Shows dialog with to options: 1) back to browser or 2) try again.
+     * 1) User gets redirected to browser with path /incorrect.
+     * 2) User can enter pw again.
      */
-    private void pwCorrectAction() {
-        //TODO redirect to website
+    private void pwIncorrectAction() {
+        //TODO: okListener: try again.
+        Constants.showNewDialogOkCancelButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ERROR_DIALOG, Constants.REDIRECT_ERROR_OK_BTN, Constants.REDIRECT_ERROR_CANCEL_BTN, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                backToBrowser(false);
+            }
+        }, null);
     }
 
-    private void pwIncorrectAction() {
-        //TODO: cancelListener: redirect to website
-        //TODO: okListener: try again.
-        Constants.showNewDialogOkCancelButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ERROR_DIALOG, Constants.REDIRECT_ERROR_OK_BTN, Constants.REDIRECT_ERROR_CANCEL_BTN, null, null);
+    /**
+     * Redirects to website.
+     * If the entered pw was correct the username and password should be shown in website.
+     * If the entered pw was incorrect and the user did not want to try it again, the user gets redirected to
+     *
+     * @param wasPasswordEnteredCorrect true if pw was correct / false if pw was incorrect
+     */
+    private void backToBrowser(boolean wasPasswordEnteredCorrect) {
+        if (!uriWebsite.toString().startsWith("http://") && !uriWebsite.toString().startsWith("https://")) {
+            uriWebsite = Uri.parse("http://" + uriWebsite.toString());
+        }
+        if (wasPasswordEnteredCorrect) {
+            uriWebsite = Uri.parse(uriWebsite.toString() + "/correct");
+        } else {
+            uriWebsite = Uri.parse(uriWebsite.toString() + "/incorrect");
+        }
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, uriWebsite);
+        startActivity(browserIntent);
     }
 
 }
