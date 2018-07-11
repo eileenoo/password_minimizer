@@ -21,61 +21,53 @@ import ath.password_minimizer.R;
 import model.NumberGridGenerator;
 import model.Vector2;
 
-public class CreatePWStep4Activity extends AppCompatActivity implements View.OnTouchListener
-{
+public class CreatePWStep4Activity extends AppCompatActivity implements View.OnTouchListener {
     private float xDelta;
     private float yDelta;
     private float scale;
-    private NumberGridGenerator numberGridGenerator;
 
     private Vector2 startPosition = new Vector2();
     private Vector2 positionDifference = new Vector2();
 
+    private String chosenNumber;
+    private Uri chosenImageUri;
+
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_pwstep4);
-        numberGridGenerator = new NumberGridGenerator(this, getStatusBarHeight());
 
-        this.scale = getResources().getDisplayMetrics().density;
+        getDataFromBundle();
+        setDataAndViewElementss();
+    }
+
+    private void getDataFromBundle() {
+        Bundle bundle = getIntent().getExtras();
+        chosenImageUri = Uri.parse(bundle.getString(Constants.CHOSEN_IMAGE_URI));
+        chosenNumber = bundle.getString(Constants.CHOSEN_NUM);
+    }
+
+    private void setDataAndViewElementss() {
+        ImageView passwordImageContainer = findViewById(R.id.passwordImageContainer);
+        passwordImageContainer.setImageBitmap(getChosenImage());
+
+
+        scale = getResources().getDisplayMetrics().density;
 
         ImageView numberGridView = findViewById(R.id.numberGrid);
         numberGridView.setOnTouchListener(this);
-    }
 
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-
-        Bundle bundle = getIntent().getExtras();
-        Uri imageUri = Uri.parse(bundle.getString(Constants.CHOSEN_IMAGE_URI));
-        String chosenNumber = (String) bundle.get(Constants.CHOSEN_NUM);
-
-        Bitmap passwordImage = getPasswordImage(imageUri);
-        setDataAndViewElements(passwordImage);
+        NumberGridGenerator numberGridGenerator = new NumberGridGenerator(this, getStatusBarHeight());
         numberGridGenerator.generateNumberMatrix(Integer.parseInt(chosenNumber),
-                (ImageView)findViewById(R.id.numberGrid), true);
-
-        ImageView numberGridView = findViewById(R.id.numberGrid);
+                (ImageView) findViewById(R.id.numberGrid), true);
 
         startPosition.x = numberGridView.getX();
         startPosition.y = numberGridView.getY();
     }
 
-    private void setDataAndViewElements(Bitmap passwordImage)
-    {
-        ImageView passwordImageContainer;
-
-        passwordImageContainer = findViewById(R.id.passwordImageContainer);
-        passwordImageContainer.setImageBitmap(passwordImage);
-    }
-
-    private Bitmap getPasswordImage(Uri imageUri)
-    {
+    private Bitmap getChosenImage() {
         String[] filePath = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(imageUri, filePath, null, null, null);
+        Cursor cursor = getContentResolver().query(chosenImageUri, filePath, null, null, null);
         cursor.moveToFirst();
         String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
 
@@ -83,16 +75,14 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
         options.inPreferredConfig = Bitmap.Config.ARGB_8888;
         Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
 
-        // At the end remember to close the cursor or you will end with the RuntimeException!
         cursor.close();
 
         return bitmap;
     }
 
-    public boolean onTouch(View view, MotionEvent event)
-    {
-        switch (event.getAction())
-        {
+
+    public boolean onTouch(View view, MotionEvent event) {
+        switch (event.getAction()) {
             case MotionEvent.ACTION_DOWN:
                 xDelta = view.getX() - event.getRawX();
                 yDelta = view.getY() - event.getRawY();
@@ -121,8 +111,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
         return true;
     }
 
-    private float[] getAvailableScreenSizeInDp()
-    {
+    private float[] getAvailableScreenSizeInDp() {
         DisplayMetrics displayMetrics = getResources().getDisplayMetrics();
         float dpHeight = PixelConverter.convertPixelsToDp(displayMetrics.heightPixels - getStatusBarHeight(), this);
         float dpWidth = PixelConverter.convertPixelsToDp(displayMetrics.widthPixels, this);
@@ -130,8 +119,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
         return new float[]{dpWidth, dpHeight};
     }
 
-    private void initiateConfirmActivity(Vector2 positionDifferenceDp)
-    {
+    private void initiateConfirmActivity(Vector2 positionDifferenceDp) {
         Bundle bundle = getIntent().getExtras();
 
         float[] screenSizeDp = getAvailableScreenSizeInDp();
@@ -149,25 +137,20 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
         startActivity(intent);
     }
 
-    public int getStatusBarHeight()
-    {
+    public int getStatusBarHeight() {
         int actionBarHeight = 0;
         int statusBarHeight;
 
         // Calculate ActionBar height
         TypedValue tv = new TypedValue();
-        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
-        {
-            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data,getResources().getDisplayMetrics());
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+            actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
         }
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
-        {
-            statusBarHeight = (int)PixelConverter.convertDpToPixel(24, this);
-        }
-        else
-        {
-            statusBarHeight = (int)PixelConverter.convertDpToPixel(25, this);
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            statusBarHeight = (int) PixelConverter.convertDpToPixel(24, this);
+        } else {
+            statusBarHeight = (int) PixelConverter.convertDpToPixel(25, this);
         }
 
         return actionBarHeight + statusBarHeight;
