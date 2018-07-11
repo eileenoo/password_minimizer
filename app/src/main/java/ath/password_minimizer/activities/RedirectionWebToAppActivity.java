@@ -5,6 +5,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
 
 import java.util.List;
 
@@ -18,35 +19,44 @@ public class RedirectionWebToAppActivity extends AppCompatActivity {
     private Uri uriWebsite;
     private PicturePassword currentPicturePassword;
 
+    private Uri exmplUri = Uri.parse("http://garten-pioniere.de.w017833c.kasserver.com/");
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_redirection_web_to_app);
 
-        List<String> path = getIntent().getData().getPathSegments();
-        uriWebsite = getIntent().getData();
-        Uri uri = Uri.parse(path.get(2));
-        PasswordStrength correctPassWordStrength;
+        findViewById(R.id.btn_example).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                backToBrowser(true);
+            }
+        });
 
-        switch (uri.toString()) {
-            case Constants.SIMPLE:
-                correctPassWordStrength = PasswordStrength.SIMPLE;
-                break;
-            case Constants.MIDDLE:
-                correctPassWordStrength = PasswordStrength.MIDDLE;
-                break;
-            case Constants.STRONG:
-                correctPassWordStrength = PasswordStrength.STRONG;
-                break;
-            default:
-                correctPassWordStrength = PasswordStrength.SIMPLE;
-                break;
-        }
-        //Show dialog and tell user to enter correct pw
-        Constants.showNewDialogOkButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ENTER_PW_DIALOG, Constants.REDIRECT_BUTTON_OK, null);
-
-        getAccordingPicturePassword(correctPassWordStrength);
-        displayCorrectPicturePassword();
+//        List<String> path = getIntent().getData().getPathSegments();
+//        uriWebsite = getIntent().getData();
+//        Uri uri = Uri.parse(path.get(2));
+//        PasswordStrength correctPassWordStrength;
+//
+//        switch (uri.toString()) {
+//            case Constants.SIMPLE:
+//                correctPassWordStrength = PasswordStrength.SIMPLE;
+//                break;
+//            case Constants.MIDDLE:
+//                correctPassWordStrength = PasswordStrength.MIDDLE;
+//                break;
+//            case Constants.STRONG:
+//                correctPassWordStrength = PasswordStrength.STRONG;
+//                break;
+//            default:
+//                correctPassWordStrength = PasswordStrength.SIMPLE;
+//                break;
+//        }
+//        //Show dialog and tell user to enter correct pw
+//        Constants.showNewDialogOkButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ENTER_PW_DIALOG, Constants.REDIRECT_BUTTON_OK, null);
+//
+//        getAccordingPicturePassword(correctPassWordStrength);
+//        displayCorrectPicturePassword();
     }
 
     /**
@@ -100,6 +110,7 @@ public class RedirectionWebToAppActivity extends AppCompatActivity {
      * @param wasPasswordEnteredCorrect true if pw was correct / false if pw was incorrect
      */
     private void backToBrowser(boolean wasPasswordEnteredCorrect) {
+        uriWebsite = exmplUri;
         if (!uriWebsite.toString().startsWith("http://") && !uriWebsite.toString().startsWith("https://")) {
             uriWebsite = Uri.parse("http://" + uriWebsite.toString());
         }
@@ -108,6 +119,7 @@ public class RedirectionWebToAppActivity extends AppCompatActivity {
         } else {
             uriWebsite = Uri.parse(uriWebsite.toString() + "/incorrect");
         }
+        System.out.println("Uri-webseite: " + uriWebsite);
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, uriWebsite);
         startActivity(browserIntent);
     }

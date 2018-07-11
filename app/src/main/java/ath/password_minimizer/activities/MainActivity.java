@@ -73,7 +73,8 @@ public class MainActivity extends BaseActivity {
      * Redirects to activity, where the user can create a new picture password.
      */
     private void openCreatePasswordActivity() {
-        Intent intent = new Intent(this, CreatePasswordActivity.class);
+//        Intent intent = new Intent(this, CreatePasswordActivity.class);
+        Intent intent = new Intent(this, RedirectionWebToAppActivity.class);
         startActivity(intent);
     }
 

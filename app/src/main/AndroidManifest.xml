@@ -40,9 +40,22 @@
         <activity android:name=".activities.RedirectionWebToAppActivity">
             <intent-filter>
                 <action android:name="android.intent.action.VIEW" />
+
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data android:scheme="http" android:host="yourapp.com" android:pathPrefix="/strength/" />
+
+                <data
+                    android:host="garten-pioniere.de.w017833c.kasserver.com"
+                    android:pathPrefix="/strength"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.BROWSABLE" />
+                <data
+                    android:host="trust-bank.de.w017833c.kasserver.com"
+                    android:pathPrefix="/strength"
+                    android:scheme="http" />
             </intent-filter>
         </activity>
     </application>
