@@ -37,7 +37,7 @@ public class NumberGridGenerator
     private final int numbersPerRow = 17;
     private final int numbersPerColumn = 25;
 
-    private final float errorThresholdDp = 5.0f;
+    private final float errorThresholdDp = 20.0f;
     private final int bitmapScaleFactor = 4;
     private int topBarHeightPx;
 
@@ -112,7 +112,7 @@ public class NumberGridGenerator
         {
             numbers = getEvenlyDistributedRandomNumbers(numbersPerRow * numbersPerColumn);
         }
-        
+
         Bitmap numbersGrid = createNumberGridBitmap(numbersPerRow, numbersPerColumn, numbers, pixelDim, forSelection);
 
         numberGridImageView.setImageBitmap(numbersGrid);
