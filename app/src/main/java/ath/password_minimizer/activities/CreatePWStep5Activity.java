@@ -162,7 +162,7 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         }
         else
         {
-            Toast.makeText(getApplicationContext(), "Passwort nicht korrekt", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), R.string.string_wrong_password, Toast.LENGTH_SHORT).show();
             setupNumberMatrix();
         }
     }
