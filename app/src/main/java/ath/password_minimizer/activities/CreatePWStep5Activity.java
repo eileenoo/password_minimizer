@@ -135,9 +135,9 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         Log.d("Is Correct: ", String.valueOf(isCorrect));
 
         if (isCorrect) {
-            PicturePassword newPicturePassword = createPicturePassword();
-            saveNewPicturePassword(newPicturePassword);
+            saveNewPicturePassword(createPicturePassword());
             Intent intent = new Intent(this, MainActivity.class);
+            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }

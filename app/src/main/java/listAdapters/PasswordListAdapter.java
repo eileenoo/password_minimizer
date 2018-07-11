@@ -1,17 +1,19 @@
 package listAdapters;
 
 import android.content.Context;
+import android.graphics.Color;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
+import Util.Constants;
 import ath.password_minimizer.R;
-import model.NavItem;
 import model.PicturePassword;
 
 public class PasswordListAdapter extends BaseAdapter {
@@ -52,10 +54,25 @@ public class PasswordListAdapter extends BaseAdapter {
 
         ImageView passwordImageView = (ImageView) view.findViewById(R.id.password_image);
         TextView passwordNameView = (TextView) view.findViewById(R.id.password_name);
+        RelativeLayout backgroundLayout = view.findViewById(R.id.background_color_layout);
 
         //TODO: set resource with real image path here
         //passwordImageView.setImageResource( mPicturePasswordItems.get(position).imagePath);
         passwordNameView.setText( mPicturePasswordItems.get(position).getPasswordName());
+        switch(mPicturePasswordItems.get(position).getPasswordStrength()) {
+            case SIMPLE:
+                backgroundLayout.setBackgroundColor(mContext.getResources().getColor(R.color.color_simple_pw));
+                break;
+            case MIDDLE:
+                backgroundLayout.setBackgroundColor(mContext.getResources().getColor(R.color.color_middle_pw));
+                break;
+            case STRONG:
+                backgroundLayout.setBackgroundColor(mContext.getResources().getColor(R.color.color_strong_pw));
+                break;
+            default:
+                backgroundLayout.setBackgroundColor(mContext.getResources().getColor(R.color.color_black_transparent));
+                break;
+        }
 
         return view;
     }
