@@ -14,6 +14,7 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import Util.Constants;
 import Util.PixelConverter;
@@ -23,7 +24,8 @@ import model.PasswordStrength;
 import model.PicturePassword;
 import model.Vector2;
 
-public class CreatePWStep5Activity extends AppCompatActivity implements View.OnTouchListener {
+public class CreatePWStep5Activity extends AppCompatActivity implements View.OnTouchListener
+{
     private float xDelta;
     private float yDelta;
     private float scale;
@@ -35,7 +37,8 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
     private int[] numberGrid;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_pwstep5);
         numberGridGenerator = new NumberGridGenerator(this, getStatusBarHeight());
@@ -47,32 +50,23 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
     }
 
     @Override
-    protected void onResume() {
+    protected void onResume()
+    {
         super.onResume();
 
-        Bundle bundle = getIntent().getExtras();
-        Uri imageUri = Uri.parse(bundle.getString(Constants.CHOSEN_IMAGE_URI));
-        String chosenNumber = (String) bundle.get(Constants.CHOSEN_NUM);
-
-        Bitmap passwordImage = getPasswordImage(imageUri);
-        setDataAndViewElements(passwordImage);
-        numberGrid = numberGridGenerator.generateNumberMatrix(Integer.parseInt(chosenNumber),
-                (ImageView) findViewById(R.id.numberGrid), false);
-
-        ImageView numberGridView = findViewById(R.id.numberGrid);
-
-        startPosition.x = numberGridView.getX();
-        startPosition.y = numberGridView.getY();
+        setupNumberMatrix();
     }
 
-    private void setDataAndViewElements(Bitmap passwordImage) {
+    private void setDataAndViewElements(Bitmap passwordImage)
+    {
         ImageView passwordImageContainer;
 
         passwordImageContainer = findViewById(R.id.passwordImageContainer);
         passwordImageContainer.setImageBitmap(passwordImage);
     }
 
-    private Bitmap getPasswordImage(Uri imageUri) {
+    private Bitmap getPasswordImage(Uri imageUri)
+    {
         String[] filePath = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(imageUri, filePath, null, null, null);
         cursor.moveToFirst();
@@ -88,8 +82,10 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         return bitmap;
     }
 
-    public boolean onTouch(View view, MotionEvent event) {
-        switch (event.getAction()) {
+    public boolean onTouch(View view, MotionEvent event)
+    {
+        switch (event.getAction())
+        {
             case MotionEvent.ACTION_DOWN:
                 xDelta = view.getX() - event.getRawX();
                 yDelta = view.getY() - event.getRawY();
@@ -111,8 +107,6 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
 
                 System.out.println("Action Up");
                 checkIfPasswordIsCorrect(positionDiffDp);
-
-                findViewById(R.id.numberGrid).setOnTouchListener(null);
                 break;
             default:
                 return false;
@@ -120,7 +114,25 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         return true;
     }
 
-    private void checkIfPasswordIsCorrect(Vector2 positionDifferenceDp) {
+    private void setupNumberMatrix()
+    {
+        Bundle bundle = getIntent().getExtras();
+        Uri imageUri = Uri.parse(bundle.getString(Constants.CHOSEN_IMAGE_URI));
+        String chosenNumber = (String) bundle.get(Constants.CHOSEN_NUM);
+
+        Bitmap passwordImage = getPasswordImage(imageUri);
+        setDataAndViewElements(passwordImage);
+        numberGrid = numberGridGenerator.generateNumberMatrix(Integer.parseInt(chosenNumber),
+                (ImageView) findViewById(R.id.numberGrid), false);
+
+        ImageView numberGridView = findViewById(R.id.numberGrid);
+
+        startPosition.x = numberGridView.getX();
+        startPosition.y = numberGridView.getY();
+    }
+
+    private void checkIfPasswordIsCorrect(Vector2 positionDifferenceDp)
+    {
         Bundle bundle = getIntent().getExtras();
         String chosenNumber = (String) bundle.get(Constants.CHOSEN_NUM);
 
@@ -131,44 +143,55 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         boolean isCorrect = numberGridGenerator.isAnyNumberInGridOnPosition(Integer.parseInt(chosenNumber),
                 numberGrid, positionDifferenceDp, positionDp);
 
-        System.out.println("is Correct?: "+ isCorrect);
-        Log.d("Is Correct: ", String.valueOf(isCorrect));
-
-        if (isCorrect) {
+        if (isCorrect)
+        {
+            findViewById(R.id.numberGrid).setOnTouchListener(null);
             saveNewPicturePassword(createPicturePassword());
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
             finish();
         }
+        else
+        {
+            Toast.makeText(getApplicationContext(), "Passwort nicht korrekt", Toast.LENGTH_SHORT).show();
+            setupNumberMatrix();
+        }
     }
 
-    public int getStatusBarHeight() {
+    public int getStatusBarHeight()
+    {
         int actionBarHeight = 0;
         int statusBarHeight;
 
         // Calculate ActionBar height
         TypedValue tv = new TypedValue();
-        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true)) {
+        if (getTheme().resolveAttribute(android.R.attr.actionBarSize, tv, true))
+        {
             actionBarHeight = TypedValue.complexToDimensionPixelSize(tv.data, getResources().getDisplayMetrics());
         }
 
-        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+        if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.M)
+        {
             statusBarHeight = (int) PixelConverter.convertDpToPixel(24, this);
-        } else {
+        }
+        else
+        {
             statusBarHeight = (int) PixelConverter.convertDpToPixel(25, this);
         }
 
         return actionBarHeight + statusBarHeight;
     }
 
-    public void saveNewPicturePassword(PicturePassword newPicturePassword) {
+    public void saveNewPicturePassword(PicturePassword newPicturePassword)
+    {
         String currentJsonPicturePasswordList = Constants.getJsonPicturePWList(this);
         String newPicturePasswordList = Constants.getJsonPicturePWListWithNewlyAddedPW(currentJsonPicturePasswordList, newPicturePassword);
         Constants.savePicturePWListToSharedPreferences(newPicturePasswordList, this);
     }
 
-    private PicturePassword createPicturePassword() {
+    private PicturePassword createPicturePassword()
+    {
         Bundle bundle = getIntent().getExtras();
         PasswordStrength pwStrength = (PasswordStrength) bundle.get(Constants.CHOSEN_PW_STRENGTH);
         String pwName = bundle.getString(Constants.CHOSEN_NAME);
