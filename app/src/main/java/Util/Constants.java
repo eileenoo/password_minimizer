@@ -40,6 +40,7 @@ public class Constants {
     public final static String CHOSEN_NAME = "chosenName";
     public final static String PASSWORD_NUM_POS_X = "passwordNumPosX";
     public final static String PASSWORD_NUM_POS_Y = "passwordNumPosY";
+    public final static String PICTURE_PASSWORD_INDEX = "picturePasswordIndex";
 
     private final static String SHARED_PREFERENCES_PASSWORD_MINIMIZER = "sharedPreferencesPWMinimizer";
     private final static String LIST_PICTURE_PASSWORDS = "listOfPicturePasswords";

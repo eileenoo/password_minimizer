@@ -2,22 +2,27 @@ package model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import java.util.Random;
 
+import Util.Constants;
 import Util.PixelConverter;
 import ath.password_minimizer.R;
+import ath.password_minimizer.activities.MainActivity;
 
 public class NumberGridGenerator
 {
@@ -215,6 +220,14 @@ public class NumberGridGenerator
         return false;
     }
 
+    public boolean checkIfPasswordIsCorrect(PicturePassword picturePassword, Vector2 positionDifferenceDp, int[] numberGrid)
+    {
+        boolean isCorrect = isAnyNumberInGridOnPosition(Integer.parseInt(picturePassword.getPasswordNumber()),
+                numberGrid, positionDifferenceDp, picturePassword.getNumberPosition());
+
+        return isCorrect;
+    }
+
     private float getVector2Difference(Vector2 v1, Vector2 v2)
     {
         float x = Math.abs(v1.x - v2.x);
@@ -222,5 +235,4 @@ public class NumberGridGenerator
 
         return x + y;
     }
-
 }

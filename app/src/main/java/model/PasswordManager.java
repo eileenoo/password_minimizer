@@ -12,7 +12,6 @@ import application.PicturePasswordApplication;
 public class PasswordManager
 {
     private static PasswordManager instance;
-    private List<PicturePassword> picturePasswords;
 
     private PasswordManager()
     {
