@@ -116,4 +116,14 @@ public class Constants {
         editor.apply();
     }
 
+    /**
+     * Get current list of picture passwords.
+     *
+     * @param context of the calling activity.
+     * @return current List of picture passwords.
+     */
+    public static List<PicturePassword> getCurrentPicturePasswordList(Context context) {
+        return getPicturePasswordList(getJsonPicturePWList(context));
+    }
+
 }
