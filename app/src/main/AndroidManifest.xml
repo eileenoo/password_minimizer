@@ -42,10 +42,7 @@
                 <action android:name="android.intent.action.VIEW" />
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:host="yourapp.com"
-                    android:path="/get/"
-                    android:scheme="http" />
+                <data android:scheme="http" android:host="yourapp.com" android:pathPrefix="/strength/" />
             </intent-filter>
         </activity>
     </application>

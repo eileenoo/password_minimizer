@@ -1,6 +1,8 @@
 package Util;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
 
 import com.google.gson.Gson;
@@ -41,8 +43,16 @@ public class Constants {
     public final static String PASSWORD_NUM_POS_X = "passwordNumPosX";
     public final static String PASSWORD_NUM_POS_Y = "passwordNumPosY";
 
+    public final static String REDIRECT_ENTER_PW_DIALOG = "Please enter the correct password";
+    public final static String REDIRECT_BUTTON_OK = "Ok";
+
+    public final static String REDIRECT_ERROR_DIALOG = "The entered password is incorrect.";
+    public final static String REDIRECT_ERROR_OK_BTN = "Try again";
+    public final static String REDIRECT_ERROR_CANCEL_BTN = "Back to website";
+
     private final static String SHARED_PREFERENCES_PASSWORD_MINIMIZER = "sharedPreferencesPWMinimizer";
     private final static String LIST_PICTURE_PASSWORDS = "listOfPicturePasswords";
+
 
 
     /**
@@ -124,6 +134,44 @@ public class Constants {
      */
     public static List<PicturePassword> getCurrentPicturePasswordList(Context context) {
         return getPicturePasswordList(getJsonPicturePWList(context));
+    }
+
+
+    /**
+     * Shows specific dialog with specific ok and cancel actions.
+     *
+     * @param context            of the calling activity.
+     * @param dialog             message.
+     * @param okButtonString     text of ok button.
+     * @param cancelButtonString text of cancel button.
+     * @param cancelListener     cancel action.
+     * @param okListener         confirm action.
+     */
+    public static void showNewDialogOkCancelButton(Context context, String dialog, String okButtonString, String cancelButtonString, DialogInterface.OnClickListener cancelListener, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(context)
+                .setCancelable(false)
+                .setMessage(dialog)
+                .setPositiveButton(okButtonString, okListener)
+                .setNegativeButton(cancelButtonString, cancelListener)
+                .create()
+                .show();
+    }
+
+    /**
+     * Shows specific dialog with specific ok and cancel actions.
+     *
+     * @param context            of the calling activity.
+     * @param dialog             message.
+     * @param okButtonString     text of ok button.
+     * @param okListener         confirm action.
+     */
+    public static void showNewDialogOkButton(Context context, String dialog, String okButtonString, DialogInterface.OnClickListener okListener) {
+        new AlertDialog.Builder(context)
+                .setCancelable(false)
+                .setMessage(dialog)
+                .setPositiveButton(okButtonString, okListener)
+                .create()
+                .show();
     }
 
 }

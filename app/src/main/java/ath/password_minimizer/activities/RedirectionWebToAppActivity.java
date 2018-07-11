@@ -20,8 +20,23 @@ public class RedirectionWebToAppActivity extends AppCompatActivity {
         setContentView(R.layout.activity_redirection_web_to_app);
 
         List<String> path = getIntent().getData().getPathSegments();
-        Uri uri = Uri.parse("smsto:" + path.get(1));
-        PasswordStrength correctPassWordStrength = PasswordStrength.SIMPLE;
+        Uri uri = Uri.parse(path.get(1));
+        PasswordStrength correctPassWordStrength;
+
+        switch (uri.toString()) {
+            case Constants.SIMPLE:
+                correctPassWordStrength = PasswordStrength.SIMPLE;
+                break;
+            case Constants.MIDDLE:
+                correctPassWordStrength = PasswordStrength.MIDDLE;
+                break;
+            case Constants.STRONG:
+                correctPassWordStrength = PasswordStrength.STRONG;
+                break;
+            default:
+                correctPassWordStrength = PasswordStrength.SIMPLE;
+                break;
+        }
         displayCorrectPicturePassword(getAccordingPicturePassword(correctPassWordStrength));
     }
 
@@ -47,6 +62,21 @@ public class RedirectionWebToAppActivity extends AppCompatActivity {
      * @param currentPicturePassword the picture password which should be shown to the user.
      */
     private void displayCorrectPicturePassword(PicturePassword currentPicturePassword) {
-
+        Constants.showNewDialogOkButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ENTER_PW_DIALOG, Constants.REDIRECT_BUTTON_OK, null);
     }
+
+    /**
+     * Redirect to website.
+     * Username and password should be shown in website.
+     */
+    private void pwCorrectAction() {
+        //TODO redirect to website
+    }
+
+    private void pwIncorrectAction() {
+        //TODO: cancelListener: redirect to website
+        //TODO: okListener: try again.
+        Constants.showNewDialogOkCancelButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ERROR_DIALOG, Constants.REDIRECT_ERROR_OK_BTN, Constants.REDIRECT_ERROR_CANCEL_BTN, null, null);
+    }
+
 }
