@@ -38,7 +38,7 @@ public class NumberGridGenerator
     private final int numbersPerColumn = 25;
 
     private final float errorThresholdDp = 20.0f;
-    private final int bitmapScaleFactor = 4;
+    private final int bitmapScaleFactor = 2;
     private int topBarHeightPx;
 
     private float scale;
