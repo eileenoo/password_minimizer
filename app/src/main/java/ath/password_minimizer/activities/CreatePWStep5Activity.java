@@ -20,6 +20,7 @@ import Util.Constants;
 import Util.PixelConverter;
 import ath.password_minimizer.R;
 import model.NumberGridGenerator;
+import model.PasswordManager;
 import model.PasswordStrength;
 import model.PicturePassword;
 import model.Vector2;
@@ -146,7 +147,14 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         if (isCorrect)
         {
             findViewById(R.id.numberGrid).setOnTouchListener(null);
-            saveNewPicturePassword(createPicturePassword());
+
+            PasswordManager passwordManager = PasswordManager.getInstance();
+            PicturePassword password = passwordManager.createPicturePassword(
+                    (PasswordStrength) bundle.get(Constants.CHOSEN_PW_STRENGTH),
+                    bundle.getString(Constants.CHOSEN_NAME), bundle.getString(Constants.CHOSEN_IMAGE_URI),
+                    chosenNumber, positionDp);
+            passwordManager.addNewPicturePassword(password);
+
             Intent intent = new Intent(this, MainActivity.class);
             intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
             startActivity(intent);
@@ -181,25 +189,5 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         }
 
         return actionBarHeight + statusBarHeight;
-    }
-
-    public void saveNewPicturePassword(PicturePassword newPicturePassword)
-    {
-        String currentJsonPicturePasswordList = Constants.getJsonPicturePWList(this);
-        String newPicturePasswordList = Constants.getJsonPicturePWListWithNewlyAddedPW(currentJsonPicturePasswordList, newPicturePassword);
-        Constants.savePicturePWListToSharedPreferences(newPicturePasswordList, this);
-    }
-
-    private PicturePassword createPicturePassword()
-    {
-        Bundle bundle = getIntent().getExtras();
-        PasswordStrength pwStrength = (PasswordStrength) bundle.get(Constants.CHOSEN_PW_STRENGTH);
-        String pwName = bundle.getString(Constants.CHOSEN_NAME);
-        String imageUri = bundle.getString(Constants.CHOSEN_IMAGE_URI);
-        String pwNum = bundle.getString(Constants.CHOSEN_NUM);
-        float pwPosX = bundle.getFloat(Constants.PASSWORD_NUM_POS_X);
-        float pwPosY = bundle.getFloat(Constants.PASSWORD_NUM_POS_Y);
-
-        return new PicturePassword(pwStrength, pwName, imageUri, pwNum, pwPosX, pwPosY);
     }
 }
