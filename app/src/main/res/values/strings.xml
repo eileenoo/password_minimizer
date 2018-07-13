@@ -30,4 +30,9 @@
     <string name="string_pin_question">question</string>
 
     <string name="string_enter_pw">Bitte gib dein Passwort ein.</string>
+
+    <string name="name">Name</string>
+    <string name="username">Benutzername</string>
+    <string name="password">Passwort</string>
+    <string name="website">Webseite</string>
 </resources>

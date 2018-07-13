@@ -1,13 +1,18 @@
 package ath.password_minimizer.activities;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ListView;
 
@@ -25,6 +30,11 @@ public class PasswordDetailWebsitesActivity extends BaseActivity {
     ListView websitesListView;
     private static WebsiteListAdapter websiteListAdapter;
     ImageButton addWebsiteButton;
+
+    EditText nameBox;
+    EditText websiteBox;
+    EditText userNameBox;
+    EditText passwordBox;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -56,10 +66,10 @@ public class PasswordDetailWebsitesActivity extends BaseActivity {
         websitesListView = (ListView) findViewById(R.id.website_list);
 
         websites = new ArrayList<>();
-        websites.add(new WebsiteCredentials("Facebook", "Sam Smith", "password123!"));
-        websites.add(new WebsiteCredentials("Twitter", "Sam Smith", "password123!"));
-        websites.add(new WebsiteCredentials("Amazon", "Sam Smith", "password123!"));
-        websites.add(new WebsiteCredentials("Deutsche Bahn", "Sam Smith", "password123!"));
+        websites.add(new WebsiteCredentials("Facebook", "www.facebook.de", "Sam Smith", "password123!"));
+        websites.add(new WebsiteCredentials("Twitter", "www.twitter.de", "Sam Smith", "password123!"));
+        websites.add(new WebsiteCredentials("Amazon", "www.amazon.de","Sam Smith", "password123!"));
+        websites.add(new WebsiteCredentials("Deutsche Bahn", "www.bahn.de",  "Sam Smith", "password123!"));
 
         websiteListAdapter = new WebsiteListAdapter (websites, getApplicationContext());
         websitesListView.setAdapter(websiteListAdapter);
@@ -71,11 +81,46 @@ public class PasswordDetailWebsitesActivity extends BaseActivity {
             }
         });
 
+        LayoutInflater inflater = (LayoutInflater) getSystemService(LAYOUT_INFLATER_SERVICE);
+        View layout = inflater.inflate(R.layout.add_website_dialog, (ViewGroup) findViewById(R.id.layout_root));
+        nameBox = (EditText) layout.findViewById(R.id.name);
+        websiteBox = (EditText) layout.findViewById(R.id.website);
+        userNameBox = (EditText) layout.findViewById(R.id.username);
+        passwordBox = (EditText) layout.findViewById(R.id.password);
+
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setView(layout);
+        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                String name = nameBox.getText().toString();
+                String website = websiteBox.getText().toString();
+                String userName = userNameBox.getText().toString();
+                String password = passwordBox.getText().toString();
+                WebsiteCredentials addedWebsite = new WebsiteCredentials(name, website, userName, password);
+                websites.add(addedWebsite);
+
+                nameBox.setText("");
+                nameBox.requestFocus();
+                websiteBox.setText("");
+                userNameBox.setText("");
+                passwordBox.setText("");
+            }
+        });
+        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which) {
+                dialog.dismiss();
+            }
+        });
+
+        final AlertDialog dialog = builder.create();
+
         addWebsiteButton = (ImageButton) findViewById(R.id.addWebsiteButton);
         addWebsiteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                // TODO: go to create password
+                dialog.show();
             }
         });
     }
