@@ -35,4 +35,8 @@
     <string name="username">Benutzername</string>
     <string name="password">Passwort</string>
     <string name="website">Webseite</string>
+    <string name="change_image">Bild ändern</string>
+    <string name="change_number">Zahl ändern</string>
+    <string name="change_security">Sicherheitsstufe ändern</string>
+    <string name="delete_password">Passwort löschen</string>
 </resources>
