@@ -2,6 +2,7 @@ package listAdapters;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -56,9 +57,11 @@ public class PasswordListAdapter extends BaseAdapter {
         TextView passwordNameView = (TextView) view.findViewById(R.id.password_name);
         RelativeLayout backgroundLayout = view.findViewById(R.id.background_color_layout);
 
-        //TODO: set resource with real image path here
-        //passwordImageView.setImageResource( mPicturePasswordItems.get(position).imagePath);
+        Uri imageUri = Uri.parse(mPicturePasswordItems.get(position).getImageUri());
+        passwordImageView.setImageURI(imageUri);
+
         passwordNameView.setText( mPicturePasswordItems.get(position).getPasswordName());
+
         switch(mPicturePasswordItems.get(position).getPasswordStrength()) {
             case SIMPLE:
                 backgroundLayout.setBackgroundColor(mContext.getResources().getColor(R.color.color_simple_pw));
