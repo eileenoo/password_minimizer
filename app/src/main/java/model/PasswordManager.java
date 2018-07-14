@@ -38,4 +38,11 @@ public class PasswordManager
     {
         return new PicturePassword(strength, name, imageUri, number, position);
     }
+
+    public void updateWebsitesOfPicturePassword(PicturePassword updatedPicturePassword)
+    {
+        String currentJsonPicturePasswordList = Constants.getJsonPicturePWList(PicturePasswordApplication.getAppContext());
+        String updatedPicturePasswordList  = Constants.getJsonPicturePWListWithUpdatedPW(currentJsonPicturePasswordList, updatedPicturePassword);
+        Constants.savePicturePWListToSharedPreferences(updatedPicturePasswordList, PicturePasswordApplication.getAppContext());
+    }
 }

@@ -28,7 +28,9 @@ public class PasswordDetailSettingsActivity extends BaseActivity {
                 case R.id.navigation_pw_detail_settings:
                     return true;
                 case R.id.navigation_pw_details_websites:
+                    String picturePasswordName = (String) getIntent().getExtras().get("picturePasswordName");
                     Intent intentPasswordWebsites = new Intent(PasswordDetailSettingsActivity.this, PasswordDetailWebsitesActivity.class);
+                    intentPasswordWebsites.putExtra("picturePasswordName", picturePasswordName);
                     startActivity(intentPasswordWebsites);
                     finish();
                     return true;

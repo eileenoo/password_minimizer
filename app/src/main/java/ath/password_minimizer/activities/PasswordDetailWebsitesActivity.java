@@ -18,9 +18,11 @@ import android.widget.ListView;
 
 import java.util.ArrayList;
 
+import Util.Constants;
 import ath.password_minimizer.R;
 import listAdapters.PasswordListAdapter;
 import listAdapters.WebsiteListAdapter;
+import model.PasswordManager;
 import model.PicturePassword;
 import model.WebsiteCredentials;
 
@@ -45,7 +47,9 @@ public class PasswordDetailWebsitesActivity extends BaseActivity {
                 case R.id.navigation_pw_details_websites:
                     return true;
                 case R.id.navigation_pw_detail_settings:
+                    String picturePasswordName = (String) getIntent().getExtras().get("picturePasswordName");
                     Intent intentPasswordSettings = new Intent(PasswordDetailWebsitesActivity.this, PasswordDetailSettingsActivity.class);
+                    intentPasswordSettings.putExtra("picturePasswordName", picturePasswordName);
                     startActivity(intentPasswordSettings);
                     finish();
                     return true;
@@ -65,11 +69,12 @@ public class PasswordDetailWebsitesActivity extends BaseActivity {
 
         websitesListView = (ListView) findViewById(R.id.website_list);
 
-        websites = new ArrayList<>();
-        websites.add(new WebsiteCredentials("Facebook", "www.facebook.de", "Sam Smith", "password123!"));
-        websites.add(new WebsiteCredentials("Twitter", "www.twitter.de", "Sam Smith", "password123!"));
-        websites.add(new WebsiteCredentials("Amazon", "www.amazon.de","Sam Smith", "password123!"));
-        websites.add(new WebsiteCredentials("Deutsche Bahn", "www.bahn.de",  "Sam Smith", "password123!"));
+        //TODO: passwords need to be able to be removed
+        //TODO: function to delete password
+
+        String picturePasswordName = (String) getIntent().getExtras().get("picturePasswordName");
+        final PicturePassword picturePassword = Constants.getPicturePasswordByName(Constants.getJsonPicturePWList(this), picturePasswordName);
+        websites = picturePassword.getWebsites();
 
         websiteListAdapter = new WebsiteListAdapter (websites, getApplicationContext());
         websitesListView.setAdapter(websiteListAdapter);
@@ -98,7 +103,10 @@ public class PasswordDetailWebsitesActivity extends BaseActivity {
                 String userName = userNameBox.getText().toString();
                 String password = passwordBox.getText().toString();
                 WebsiteCredentials addedWebsite = new WebsiteCredentials(name, website, userName, password);
+
                 websites.add(addedWebsite);
+                PasswordManager passwordManager = PasswordManager.getInstance();
+                passwordManager.updateWebsitesOfPicturePassword(picturePassword);
 
                 nameBox.setText("");
                 nameBox.requestFocus();
