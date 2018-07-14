@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#3F51B5</color>
-    <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimary">#34495e</color>
+    <color name="colorPrimaryDark">#2c3e50</color>
+    <color name="colorAccent">#e74c3c</color>
 
     <color name="color_main_blue">#420BBF</color>
     <color name="color_main_violet">#8554CF</color>
     <color name="color_main_lighter_violet">#B923E6</color>
 
-    <color name="color_simple_pw">#87D37C</color>
-    <color name="color_middle_pw">#FABE58</color>
-    <color name="color_strong_pw">#F03434</color>
+    <color name="color_simple_pw">#6BF178</color>
+    <color name="color_middle_pw">#FFE74C</color>
+    <color name="color_strong_pw">#FF5964</color>
 
     <color name="color_button_pin">#80230073</color>
     <color name="color_button_pin_pressed">#800D002C</color>
