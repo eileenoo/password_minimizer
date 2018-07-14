@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import model.PicturePassword;
+import model.WebsiteCredentials;
 
 import static android.content.Context.MODE_PRIVATE;
 
@@ -78,6 +79,19 @@ public class Constants {
         return gson.toJson(picturePasswordList);
     }
 
+    public static String getJsonPicturePWListWithUpdatedPW(String jSonPicturePasswordList, PicturePassword updatedPicturePassword) {
+        Gson gson = new Gson();
+        List<PicturePassword> picturePasswordList = getPicturePasswordList(jSonPicturePasswordList);
+
+        for (int i = 0; i < picturePasswordList.size(); i++) {
+            if (picturePasswordList.get(i).getPasswordName().equals(updatedPicturePassword.getPasswordName())) {
+                picturePasswordList.get(i).setWebsites(updatedPicturePassword.getWebsites());
+            }
+        }
+
+        return gson.toJson(picturePasswordList);
+    }
+
     /**
      * Save new json with list of picture passwords to shared preferences.
      *
@@ -103,6 +117,26 @@ public class Constants {
         Type picturePasswordListType = new TypeToken<ArrayList<PicturePassword>>() {
         }.getType();
         return gson.fromJson(jsonPicturePasswordList, picturePasswordListType);
+    }
+
+    /**
+     * Returns the picture password for a specific name
+     * (expects names to be unique - if not, always first occurence will be returned)
+     *
+     * @param jsonPicturePasswordList List of picture passwords from shared preferences.
+     * @param passwordName Name of the searched password.
+     * @return
+     */
+    public static PicturePassword getPicturePasswordByName(String jsonPicturePasswordList, String passwordName) {
+        List<PicturePassword> picturePasswords = getPicturePasswordList(jsonPicturePasswordList);
+
+        for (int i = 0; i < picturePasswords.size(); i++) {
+            if (picturePasswords.get(i).getPasswordName().equals(passwordName)) {
+                return picturePasswords.get(i);
+            }
+        }
+
+        return null;
     }
 
     /**

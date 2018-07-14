@@ -39,6 +39,7 @@
     <string name="change_number">Zahl ändern</string>
     <string name="change_security">Sicherheitsstufe ändern</string>
     <string name="delete_password">Passwort löschen</string>
+
     <string name="string_create_pw_choose_name">"Wähle einen Namen für dein Password aus."</string>
     <string name="string_create_pw_choose_image">"Wähle eine Bild für dein Password aus."</string>
     <string name="string_create_pw_choose_num">"Wähle eine Zahl für dein Password aus."</string>

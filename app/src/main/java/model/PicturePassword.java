@@ -42,6 +42,14 @@ public class PicturePassword {
         this.passwordName = passwordName;
     }
 
+    public ArrayList<WebsiteCredentials> getWebsites() {
+        return websites;
+    }
+
+    public void setWebsites(ArrayList<WebsiteCredentials> websites) {
+        this.websites = websites;
+    }
+
     public String getImageUri() {
         return imageUri;
     }
