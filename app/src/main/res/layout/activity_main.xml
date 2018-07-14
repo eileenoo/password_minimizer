@@ -1,34 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.v4.widget.DrawerLayout
+<android.support.design.widget.CoordinatorLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:id="@+id/drawerLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- The main content view -->
-    <RelativeLayout
-        android:id="@+id/mainContent"
+    <android.support.v4.widget.DrawerLayout
+        android:id="@+id/drawerLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" >
+        android:layout_height="match_parent">
+        <!-- The main content view -->
+        <RelativeLayout
+            android:id="@+id/mainContent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" >
 
-        <ImageButton
-            android:id="@+id/addPasswordButton"
-            android:layout_width="70dp"
-            android:layout_height="70dp"
-            android:layout_centerInParent="true"
-            android:adjustViewBounds="true"
-            android:background="@android:color/transparent"
-            android:scaleType="fitXY"
-            android:src="@drawable/ic_action_add_big" />
+            <ListView
+                android:id="@+id/password_list"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="50dp"/>
 
-        <ListView
-            android:id="@+id/password_list"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="50dp"/>
+        </RelativeLayout>
 
-    </RelativeLayout>
+        <include layout="@layout/navigation_drawer"></include>
+    </android.support.v4.widget.DrawerLayout>
 
-    <include layout="@layout/navigation_drawer"/>
+    <!--<include layout="@layout/navigation_drawer"/>-->
+    <android.support.design.widget.FloatingActionButton
+        android:id="@+id/addPasswordButton"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_gravity="bottom|end"
+        android:layout_margin="20dp"
+        android:clickable="true"
+        android:src="@drawable/ic_generic_add_white" />
 
-</android.support.v4.widget.DrawerLayout>
+</android.support.design.widget.CoordinatorLayout>
