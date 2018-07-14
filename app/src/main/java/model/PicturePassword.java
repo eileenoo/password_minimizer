@@ -8,25 +8,22 @@ import java.util.ArrayList;
 
 public class PicturePassword {
 
-    // TODO: Feel free to modifiy
-    public String passwordName;
-    public PasswordStrength passwordStrength;
-    public String imagePath;
+    private PasswordStrength passwordStrength;
+    private String passwordName;
+    private String imageUri;
+    private String passwordNumber;
+    private Vector2 numberPosition;
     public ArrayList<WebsiteCredentials> websites;
 
-    public PicturePassword(String passwordName, PasswordStrength passwordStrength, String imagePath) {
-        this.passwordName = passwordName;
+
+    public PicturePassword(PasswordStrength passwordStrength, String passwordName, String imageUri, String passwordNumber, Vector2 numberPosition) {
+
         this.passwordStrength = passwordStrength;
-        this.imagePath = imagePath;
-        this.websites = new ArrayList<>();
-    }
-
-    public String getPasswordName() {
-        return passwordName;
-    }
-
-    public void setPasswordName(String passwordName) {
         this.passwordName = passwordName;
+        this.imageUri = imageUri;
+        this.passwordNumber = passwordNumber;
+        this.numberPosition = numberPosition;
+        this.websites = new ArrayList<>();
     }
 
     public PasswordStrength getPasswordStrength() {
@@ -37,12 +34,36 @@ public class PicturePassword {
         this.passwordStrength = passwordStrength;
     }
 
-    public String getImagePath() {
-        return imagePath;
+    public String getPasswordName() {
+        return passwordName;
     }
 
-    public void setImagePath(String imagePath) {
-        this.imagePath = imagePath;
+    public void setPasswordName(String passwordName) {
+        this.passwordName = passwordName;
+    }
+
+    public String getImageUri() {
+        return imageUri;
+    }
+
+    public void setImageUri(String imageUri) {
+        this.imageUri = imageUri;
+    }
+
+    public String getPasswordNumber() {
+        return passwordNumber;
+    }
+
+    public void setPasswordNumber(String passwordNumber) {
+        this.passwordNumber = passwordNumber;
+    }
+
+    public Vector2 getNumberPosition() {
+        return numberPosition;
+    }
+
+    public void setNumberPosition(Vector2 numberPosition) {
+        this.numberPosition = numberPosition;
     }
 
     public void addWebsite(WebsiteCredentials websiteCredentials) {

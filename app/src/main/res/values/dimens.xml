@@ -9,4 +9,10 @@
     <dimen name="dimen_pin_buttons_margin">9dp</dimen>
     <dimen name="dimen_pinField_password_text_size">50sp</dimen>
 
+    <dimen name="dimen_buttons_create_pw_margin">5dp</dimen>
+    <dimen name="dimen_buttons_create_pw_text_size">20sp</dimen>
+    <dimen name="dimen_create_pw_info_text">15sp</dimen>
+
+    <dimen name="dimen_padding_dots">10dp</dimen>
+
 </resources>

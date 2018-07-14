@@ -29,7 +29,7 @@
     <string name="string_pin_delete">delete</string>
     <string name="string_pin_question">question</string>
 
-    <string name="string_enter_pw">Bitte gib dein Passwort ein.</string>
+    <string name="string_enter_pw">Bitte gib deinen PIN ein.</string>
 
     <string name="name">Name</string>
     <string name="username">Benutzername</string>
@@ -39,4 +39,14 @@
     <string name="change_number">Zahl ändern</string>
     <string name="change_security">Sicherheitsstufe ändern</string>
     <string name="delete_password">Passwort löschen</string>
+    <string name="string_create_pw_choose_name">"Wähle einen Namen für dein Password aus."</string>
+    <string name="string_create_pw_choose_image">"Wähle eine Bild für dein Password aus."</string>
+    <string name="string_create_pw_choose_num">"Wähle eine Zahl für dein Password aus."</string>
+    <string name="string_confirm_pw_1">"Ziehe nun deine eben gewählte Zahl ("</string>
+    <string name="string_confirm_pw_2">") auf einen bestimmten Fleck im Bild."</string>
+
+    <string name="string_create_pw_hint_name">Name des Passworts</string>
+    <string name="string_btn_next">weiter</string>
+    <string name="string_create_pw_choose_image_description">Wähle ein Bild aus.</string>
+    <string name="string_wrong_password">Falsches Passwort</string>
 </resources>
