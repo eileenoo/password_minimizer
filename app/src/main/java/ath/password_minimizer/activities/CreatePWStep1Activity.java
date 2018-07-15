@@ -1,6 +1,8 @@
 package ath.password_minimizer.activities;
 
 import android.content.Intent;
+import android.support.design.widget.TabLayout;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
@@ -47,6 +49,10 @@ public class CreatePWStep1Activity extends AppCompatActivity {
                 new InputFilter.LengthFilter(maxLengthOfPwName)
         });
         pwNameField.requestFocus();
+
+        ViewPager mImageViewPager = findViewById(R.id.pager);
+        TabLayout mTabLayout = findViewById(R.id.tab_dots);
+        mTabLayout.setupWithViewPager(mImageViewPager, true);
     }
 
     private void setOnClickListener() {

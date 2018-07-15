@@ -3,27 +3,27 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/color_main_violet"
+    android:orientation="vertical"
     tools:context="ath.password_minimizer.activities.CreatePWStep3Activity">
 
     <TextView
         android:id="@+id/step3_description"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:textSize="@dimen/dimen_create_pw_info_text"
-        android:textColor="@android:color/white"
-        android:text="@string/string_create_pw_choose_num"
+        android:layout_weight="1"
         android:gravity="center"
-        android:layout_weight="1"/>
+        android:text="@string/string_create_pw_choose_num"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dimen_create_pw_info_text" />
 
 
     <GridLayout
         android:id="@+id/gridlayout_select_num"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_weight="6"
         android:layout_gravity="center"
+        android:layout_weight="6"
         android:alignmentMode="alignBounds"
         android:columnCount="3"
         android:orientation="horizontal"
@@ -160,23 +160,39 @@
 
     <Button
         android:id="@+id/step3_btn_next"
-        android:text="@string/string_btn_next"
-        android:textAllCaps="false"
-        android:layout_margin="@dimen/dimen_buttons_create_pw_margin"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:textColor="@android:color/white"
+        android:layout_margin="@dimen/dimen_buttons_create_pw_margin"
+        android:layout_weight="1"
         android:background="@drawable/create_pw_button_background_disabled"
-        android:textSize="@dimen/dimen_buttons_create_pw_text_size"
-        android:layout_weight="1"/>
+        android:text="@string/string_btn_next"
+        android:textAllCaps="false"
+        android:textColor="@android:color/white"
+        android:textSize="@dimen/dimen_buttons_create_pw_text_size" />
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/step3_custom_progressbar"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:orientation="horizontal"
-        android:layout_weight="0.5">
+        android:layout_weight="0.5"
+        android:orientation="horizontal">
 
-    </LinearLayout>
+        <android.support.v4.view.ViewPager
+            android:id="@+id/pager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+        </android.support.v4.view.ViewPager>
+
+        <android.support.design.widget.TabLayout
+            android:id="@+id/tab_dots"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/tab_selector">
+
+        </android.support.design.widget.TabLayout>
+
+    </RelativeLayout>
 
 </LinearLayout>

@@ -115,9 +115,9 @@ public class RedirectionWebToAppActivity extends AppCompatActivity {
             uriWebsite = Uri.parse("http://" + uriWebsite.toString());
         }
         if (wasPasswordEnteredCorrect) {
-            uriWebsite = Uri.parse(uriWebsite.toString() + "/correct");
+            uriWebsite = Uri.parse(uriWebsite.toString() + "correct");
         } else {
-            uriWebsite = Uri.parse(uriWebsite.toString() + "/incorrect");
+            uriWebsite = Uri.parse(uriWebsite.toString() + "incorrect");
         }
         System.out.println("Uri-webseite: " + uriWebsite);
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, uriWebsite);
