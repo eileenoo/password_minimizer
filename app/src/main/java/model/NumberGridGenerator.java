@@ -18,6 +18,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -96,7 +98,7 @@ public class NumberGridGenerator
         return result;
     }
 
-    public int[] generateNumberMatrix(int passwordNumber, ImageView numberGridImageView, boolean forSelection)
+    public int[] generateNumberMatrix(int passwordNumber, ImageView numberGridImageView, PasswordStrength strength, boolean forSelection)
     {
         int pixelDim = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.number1).getWidth();
@@ -164,30 +166,41 @@ public class NumberGridGenerator
         return numbers;
     }
 
-    private int[] getEvenlyDistributedRandomNumbers(int count)
+    private int[] getEvenlyDistributedRandomNumbers(int quantity, int differentNumberCount, int passwordNumber)
     {
-        int[] numbers = new int[count];
+        int[] numbers = new int[quantity];
 
-        int rest = count % 9;
-        int countNoRest = count - rest;
-        int chunkCount = countNoRest / 9;
+        int rest = quantity % differentNumberCount;
+        int countNoRest = quantity - rest;
+        int chunkCount = countNoRest / differentNumberCount;
+
+        List<Integer> numberChunkSelection = Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9);
+        numberChunkSelection.remove(passwordNumber - 1);
+        int[] numberChunk = new int[differentNumberCount];
+
+        // TODO: finish
+        //for ()
+
+
+        numberChunk[0] = passwordNumber;
+
 
         for (int i = 0; i < chunkCount; i++)
         {
-            int[] numberChunk = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+
             shuffleArray(numberChunk);
 
-            for (int j = i * 9; j < (i * 9) + 9; j++)
+            for (int j = i * differentNumberCount; j < (i * differentNumberCount) + differentNumberCount; j++)
             {
-                numbers[j] = numberChunk[j - (i * 9)];
+                numbers[j] = numberChunk[j - (i * differentNumberCount)];
             }
         }
 
         int[] randomRestNumbers = getRandomNumbers(rest);
 
-        for (int i = count - rest; i < count; i++)
+        for (int i = quantity - rest; i < quantity; i++)
         {
-            numbers[i] = randomRestNumbers[i - (count - rest)];
+            numbers[i] = randomRestNumbers[i - (quantity - rest)];
         }
 
         return numbers;
