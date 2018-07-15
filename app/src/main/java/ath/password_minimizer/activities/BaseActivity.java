@@ -41,7 +41,7 @@ public class BaseActivity extends AppCompatActivity {
         mNavItems.add(new NavItem(R.string.string_drawer_about, R.string.string_drawer_about_description, R.drawable.ic_action_about));
 
         // DrawerLayout
-        mDrawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
+        mDrawerLayout = findViewById(R.id.drawerLayout);
         mDrawerToggle = new ActionBarDrawerToggle(this, mDrawerLayout, R.string.string_drawer_open, R.string.string_drawer_close) {
             @Override
             public void onDrawerOpened(View drawerView) {

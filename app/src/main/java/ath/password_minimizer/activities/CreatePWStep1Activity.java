@@ -102,7 +102,7 @@ public class CreatePWStep1Activity extends AppCompatActivity {
             nextButton.setTextColor(getResources().getColor(R.color.color_white));
         } else {
             nextButton.setBackground(getResources().getDrawable(R.drawable.create_pw_button_background_disabled));
-            nextButton.setTextColor(getResources().getColor(R.color.color_button_pin_pressed));
+            nextButton.setTextColor(getResources().getColor(R.color.color_inactive_text));
         }
     }
 }

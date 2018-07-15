@@ -2,22 +2,29 @@ package model;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
 import android.graphics.Paint;
 import android.graphics.Rect;
 import android.os.Build;
+import android.os.Bundle;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.ViewGroup;
 import android.view.Window;
 import android.widget.ImageView;
+import android.widget.Toast;
 
+import java.util.ArrayList;
 import java.util.Random;
+import java.util.concurrent.ThreadLocalRandom;
 
+import Util.Constants;
 import Util.PixelConverter;
 import ath.password_minimizer.R;
+import ath.password_minimizer.activities.MainActivity;
 
 public class NumberGridGenerator
 {
@@ -30,8 +37,8 @@ public class NumberGridGenerator
     private final int numbersPerRow = 17;
     private final int numbersPerColumn = 25;
 
-    private final float errorThresholdDp = 5.0f;
-    private final int bitmapScaleFactor = 4;
+    private final float errorThresholdDp = 20.0f;
+    private final int bitmapScaleFactor = 2;
     private int topBarHeightPx;
 
     private float scale;
@@ -99,13 +106,12 @@ public class NumberGridGenerator
         if (forSelection)
         {
             numbers = getRandomNumbers(numbersPerRow * numbersPerColumn, passwordNumber);
+            numbers[((numbersPerRow * numbersPerColumn) - 1) / 2] = passwordNumber;
         }
         else
         {
-            numbers = getRandomNumbers(numbersPerRow * numbersPerColumn);
+            numbers = getEvenlyDistributedRandomNumbers(numbersPerRow * numbersPerColumn);
         }
-
-        numbers[((numbersPerRow * numbersPerColumn) - 1) / 2] = passwordNumber;
 
         Bitmap numbersGrid = createNumberGridBitmap(numbersPerRow, numbersPerColumn, numbers, pixelDim, forSelection);
 
@@ -153,6 +159,35 @@ public class NumberGridGenerator
         for (int i = 0; i < numbers.length; i++)
         {
             numbers[i] = random.nextInt(10 - 1) + 1;
+        }
+
+        return numbers;
+    }
+
+    private int[] getEvenlyDistributedRandomNumbers(int count)
+    {
+        int[] numbers = new int[count];
+
+        int rest = count % 9;
+        int countNoRest = count - rest;
+        int chunkCount = countNoRest / 9;
+
+        for (int i = 0; i < chunkCount; i++)
+        {
+            int[] numberChunk = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
+            shuffleArray(numberChunk);
+
+            for (int j = i * 9; j < (i * 9) + 9; j++)
+            {
+                numbers[j] = numberChunk[j - (i * 9)];
+            }
+        }
+
+        int[] randomRestNumbers = getRandomNumbers(rest);
+
+        for (int i = count - rest; i < count; i++)
+        {
+            numbers[i] = randomRestNumbers[i - (count - rest)];
         }
 
         return numbers;
@@ -215,6 +250,14 @@ public class NumberGridGenerator
         return false;
     }
 
+    public boolean checkIfPasswordIsCorrect(PicturePassword picturePassword, Vector2 positionDifferenceDp, int[] numberGrid)
+    {
+        boolean isCorrect = isAnyNumberInGridOnPosition(Integer.parseInt(picturePassword.getPasswordNumber()),
+                numberGrid, positionDifferenceDp, picturePassword.getNumberPosition());
+
+        return isCorrect;
+    }
+
     private float getVector2Difference(Vector2 v1, Vector2 v2)
     {
         float x = Math.abs(v1.x - v2.x);
@@ -223,4 +266,17 @@ public class NumberGridGenerator
         return x + y;
     }
 
+    // Implementing Fisher–Yates shuffle
+    private void shuffleArray(int[] ar)
+    {
+        Random rnd = new Random();
+        for (int i = ar.length - 1; i > 0; i--)
+        {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            int a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
+    }
 }

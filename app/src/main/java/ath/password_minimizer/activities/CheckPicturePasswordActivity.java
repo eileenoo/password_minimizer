@@ -6,10 +6,9 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
+import android.os.Bundle;
 import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
@@ -25,7 +24,7 @@ import model.PasswordStrength;
 import model.PicturePassword;
 import model.Vector2;
 
-public class CreatePWStep5Activity extends AppCompatActivity implements View.OnTouchListener
+public class CheckPicturePasswordActivity extends AppCompatActivity implements View.OnTouchListener
 {
     private float xDelta;
     private float yDelta;
@@ -36,15 +35,23 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
     private Vector2 positionDifference = new Vector2();
 
     private int[] numberGrid;
+    PicturePassword picturePassword;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_create_pwstep5);
+        setContentView(R.layout.activity_check_picture_password);
+
         numberGridGenerator = new NumberGridGenerator(this, getStatusBarHeight());
 
         this.scale = getResources().getDisplayMetrics().density;
+
+        Bundle bundle = getIntent().getExtras();
+
+        int passwordIndex = bundle.getInt(Constants.PICTURE_PASSWORD_INDEX);
+        String json = Constants.getJsonPicturePWList(this);
+        picturePassword = Constants.getPicturePasswordList(json).get(passwordIndex);
 
         ImageView numberGridView = findViewById(R.id.numberGrid);
         numberGridView.setOnTouchListener(this);
@@ -54,7 +61,6 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
     protected void onResume()
     {
         super.onResume();
-
         setupNumberMatrix();
     }
 
@@ -150,13 +156,14 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
 
         if (isCorrect)
         {
-            findViewById(R.id.numberGrid).setOnTouchListener(null);
-            passwordManager.addNewPicturePassword(password);
-
-            Intent intent = new Intent(this, MainActivity.class);
-            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
-            startActivity(intent);
-            finish();
+            // TODO: go back to activity if password was correct
+//            findViewById(R.id.numberGrid).setOnTouchListener(null);
+//            passwordManager.addNewPicturePassword(password);
+//
+//            Intent intent = new Intent(this, MainActivity.class);
+//            intent.setFlags(intent.FLAG_ACTIVITY_NEW_TASK | intent.FLAG_ACTIVITY_CLEAR_TASK);
+//            startActivity(intent);
+//            finish();
         }
         else
         {

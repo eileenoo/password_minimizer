@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/pin_bg"
     android:orientation="vertical"
+    android:background="@color/colorPrimaryDark"
     tools:context="ath.password_minimizer.activities.StartPinActivity">
 
     <LinearLayout
@@ -26,7 +26,7 @@
                 android:id="@+id/enter_pw_text"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:textColor="@android:color/white"
+                android:textColor="@color/color_white"
                 android:text="@string/string_enter_pw"
                 android:gravity="center|bottom"
                 />
@@ -54,7 +54,7 @@
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:inputType="numberPassword"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_pinField_password_text_size" />
 
             <TextView
@@ -70,7 +70,7 @@
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:inputType="numberPassword"
-                android:textColor="@android:color/black"
+                android:textColor="@android:color/white"
                 android:textSize="@dimen/dimen_pinField_password_text_size" />
 
             <TextView
@@ -86,7 +86,7 @@
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:inputType="numberPassword"
-                android:textColor="@android:color/black"
+                android:textColor="@color/color_white"
                 android:textSize="@dimen/dimen_pinField_password_text_size" />
 
             <TextView
@@ -102,7 +102,7 @@
                 android:gravity="center"
                 android:includeFontPadding="false"
                 android:inputType="numberPassword"
-                android:textColor="@android:color/black"
+                android:textColor="@color/color_white"
                 android:textSize="@dimen/dimen_pinField_password_text_size" />
         </LinearLayout>
     </LinearLayout>

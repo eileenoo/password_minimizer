@@ -1,17 +1,17 @@
 package listAdapters;
 
 import android.content.Context;
+import android.media.Image;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
+import android.widget.ImageButton;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
 import ath.password_minimizer.R;
-import model.PicturePassword;
 import model.WebsiteCredentials;
 
 public class WebsiteListAdapter extends BaseAdapter {
@@ -52,6 +52,16 @@ public class WebsiteListAdapter extends BaseAdapter {
 
         TextView websiteNameView = (TextView) view.findViewById(R.id.website_name);
         websiteNameView.setText( mWebsiteCredentialsItems.get(position).mName );
+
+        /*ImageButton deleteButton = (ImageButton) view.findViewById(R.id.deleteWebsiteButton);
+        deleteButton.setTag(position);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                int positionToRemove = (int) v.getTag();
+
+            }
+        });*/
 
         return view;
     }

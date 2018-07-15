@@ -14,4 +14,23 @@ android:padding="10dp">
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:textColor="@android:color/black" />
 
+    <ImageButton
+        android:id="@+id/editWebsiteButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:backgroundTint="@android:color/transparent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="40dp"
+        android:src="@android:drawable/ic_menu_edit"/>
+
+    <ImageButton
+        android:id="@+id/deleteWebsiteButton"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:backgroundTint="@android:color/transparent"
+        android:layout_centerVertical="true"
+        android:layout_alignParentRight="true"
+        android:src="@android:drawable/ic_delete"/>
+
 </RelativeLayout>

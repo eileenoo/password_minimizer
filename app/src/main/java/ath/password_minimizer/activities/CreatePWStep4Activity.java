@@ -33,9 +33,16 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
     private Uri chosenImageUri;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create_pwstep4);
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
 
         getDataFromBundle();
         setDataAndViewElementss();

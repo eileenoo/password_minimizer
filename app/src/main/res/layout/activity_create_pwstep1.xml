@@ -3,7 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/color_main_violet"
     android:orientation="vertical"
     tools:context="ath.password_minimizer.activities.CreatePWStep1Activity">
 
@@ -14,7 +13,7 @@
         android:layout_weight="1"
         android:gravity="center"
         android:text="@string/string_create_pw_choose_name"
-        android:textColor="@android:color/white"
+        android:textColor="@color/colorPrimary"
         android:textSize="@dimen/dimen_create_pw_info_text" />
 
     <LinearLayout

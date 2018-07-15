@@ -19,8 +19,9 @@
                                   <option name="values">
                                     <map>
                                       <entry key="assetType" value="IMAGE" />
-                                      <entry key="imageAsset" value="C:\data\University\Master\Semester 4\AdvancedTopicsHCI\Images\add-circular-outlined-button.png" />
-                                      <entry key="outputName" value="ic_action_add_big" />
+                                      <entry key="imageAsset" value="$USER_HOME$/Downloads/add.png" />
+                                      <entry key="outputName" value="ic_generic_add_white" />
+                                      <entry key="theme" value="HOLO_DARK" />
                                     </map>
                                   </option>
                                 </PersistentState>

@@ -1,11 +1,6 @@
 package model;
 
 import java.util.ArrayList;
-import com.google.gson.Gson;
-import com.google.gson.reflect.TypeToken;
-
-import java.lang.reflect.Type;
-import java.util.List;
 
 /**
  * Created by VerenaSchlott on 05/06/18.
@@ -17,19 +12,17 @@ public class PicturePassword {
     private String passwordName;
     private String imageUri;
     private String passwordNumber;
-    private float numPosX;
-    private float numPosY;
+    private Vector2 numberPosition;
     public ArrayList<WebsiteCredentials> websites;
 
 
-    public PicturePassword(PasswordStrength passwordStrength, String passwordName, String imageUri, String passwordNumber, float numPosX, float numPosY) {
+    public PicturePassword(PasswordStrength passwordStrength, String passwordName, String imageUri, String passwordNumber, Vector2 numberPosition) {
 
         this.passwordStrength = passwordStrength;
         this.passwordName = passwordName;
         this.imageUri = imageUri;
         this.passwordNumber = passwordNumber;
-        this.numPosX = numPosX;
-        this.numPosY = numPosY;
+        this.numberPosition = numberPosition;
         this.websites = new ArrayList<>();
     }
 
@@ -49,6 +42,14 @@ public class PicturePassword {
         this.passwordName = passwordName;
     }
 
+    public ArrayList<WebsiteCredentials> getWebsites() {
+        return websites;
+    }
+
+    public void setWebsites(ArrayList<WebsiteCredentials> websites) {
+        this.websites = websites;
+    }
+
     public String getImageUri() {
         return imageUri;
     }
@@ -65,20 +66,12 @@ public class PicturePassword {
         this.passwordNumber = passwordNumber;
     }
 
-    public float getNumPosX() {
-        return numPosX;
+    public Vector2 getNumberPosition() {
+        return numberPosition;
     }
 
-    public void setNumPosX(float numPosX) {
-        this.numPosX = numPosX;
-    }
-
-    public float getNumPosY() {
-        return numPosY;
-    }
-
-    public void setNumPosY(float numPosY) {
-        this.numPosY = numPosY;
+    public void setNumberPosition(Vector2 numberPosition) {
+        this.numberPosition = numberPosition;
     }
 
     public void addWebsite(WebsiteCredentials websiteCredentials) {
