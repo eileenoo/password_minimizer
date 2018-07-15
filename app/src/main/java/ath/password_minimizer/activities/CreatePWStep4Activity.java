@@ -19,6 +19,7 @@ import Util.Constants;
 import Util.PixelConverter;
 import ath.password_minimizer.R;
 import model.NumberGridGenerator;
+import model.PasswordStrength;
 import model.Vector2;
 
 public class CreatePWStep4Activity extends AppCompatActivity implements View.OnTouchListener {
@@ -31,6 +32,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
 
     private String chosenNumber;
     private Uri chosenImageUri;
+    private PasswordStrength passwordStrength;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -52,6 +54,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
         Bundle bundle = getIntent().getExtras();
         chosenImageUri = Uri.parse(bundle.getString(Constants.CHOSEN_IMAGE_URI));
         chosenNumber = bundle.getString(Constants.CHOSEN_NUM);
+        passwordStrength = (PasswordStrength)bundle.get(Constants.CHOSEN_PW_STRENGTH);
     }
 
     private void setDataAndViewElementss() {
@@ -66,7 +69,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
 
         NumberGridGenerator numberGridGenerator = new NumberGridGenerator(this, getStatusBarHeight());
         numberGridGenerator.generateNumberMatrix(Integer.parseInt(chosenNumber),
-                (ImageView) findViewById(R.id.numberGrid), true);
+                (ImageView) findViewById(R.id.numberGrid),  passwordStrength,true);
 
         startPosition.x = numberGridView.getX();
         startPosition.y = numberGridView.getY();
