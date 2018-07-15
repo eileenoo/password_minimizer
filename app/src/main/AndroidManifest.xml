@@ -44,21 +44,13 @@
                 <category android:name="android.intent.category.DEFAULT" />
                 <category android:name="android.intent.category.BROWSABLE" />
 
-                <data
-                    android:host="garten-pioniere.de.w017833c.kasserver.com"
-                    android:scheme="pw-minimizer" />
-                <!--<data-->
-                    <!--android:host="garten-pioniere.de.w017833c.kasserver.com"-->
-                    <!--android:pathPrefix="/strength"-->
-                    <!--android:scheme="http" />-->
-            </intent-filter>
-            <intent-filter>
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:host="trust-bank.de.w017833c.kasserver.com"
-                    android:pathPrefix="/strength"
+                <data android:host="www.garten-pioniere.de.w017833c.kasserver.com"
                     android:scheme="http" />
+                <data android:host="garten-pioniere.de.w017833c.kasserver.com"
+                    android:scheme="http"/>
+                <data
+                    android:host="strong"
+                    android:scheme="pw-minimizer" />
             </intent-filter>
         </activity>
     </application>
