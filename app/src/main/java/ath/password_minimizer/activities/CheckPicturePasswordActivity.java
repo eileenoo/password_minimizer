@@ -121,10 +121,10 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
         boolean isCorrect = numberGridGenerator.checkIfPasswordIsCorrect(password, positionDifferenceDp, numberGrid);
 
         if (isCorrect) {
-            Toast.makeText(this, "Correct", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Password is correct", Toast.LENGTH_LONG).show();
 
         } else {
-            Toast.makeText(this, "Incorrect", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Password is incorrect", Toast.LENGTH_LONG).show();
 
         }
     }
