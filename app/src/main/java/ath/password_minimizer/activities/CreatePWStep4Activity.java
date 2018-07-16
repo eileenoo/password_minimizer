@@ -155,6 +155,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
         intent.putExtras(bundle);
 
         startActivity(intent);
+        finish();
     }
 
     public int getStatusBarHeight() {

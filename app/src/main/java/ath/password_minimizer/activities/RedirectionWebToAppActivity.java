@@ -149,15 +149,20 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
      * @param wasPasswordEnteredCorrect true if pw was correct / false if pw was incorrect
      */
     private void backToBrowser(boolean wasPasswordEnteredCorrect) {
-        if (!uriWebsite.toString().startsWith("http://") && !uriWebsite.toString().startsWith("https://")) {
-            uriWebsite = Uri.parse("http://" + uriWebsite.toString());
-        }
-        if (wasPasswordEnteredCorrect) {
-            uriWebsite = Uri.parse(uriWebsite.toString() + "correct");
+//        if (!uriWebsite.toString().startsWith("http://") && !uriWebsite.toString().startsWith("https://")) {
+//            uriWebsite = Uri.parse("http://" + uriWebsite.toString());
+//        }
+//        if (wasPasswordEnteredCorrect) {
+//            uriWebsite = Uri.parse(uriWebsite.toString() + "correct");
+//        } else {
+//            uriWebsite = Uri.parse(uriWebsite.toString() + "incorrect");
+//        }
+
+        if (currentPicturePassword.getPasswordStrength() == PasswordStrength.SIMPLE) {
+            uriWebsite = Uri.parse("http://www.garten-pioniere.de.w017833c.kasserver.com/");
         } else {
-            uriWebsite = Uri.parse(uriWebsite.toString() + "incorrect");
+            uriWebsite = Uri.parse("http://trust-bank.de.w017833c.kasserver.com/");
         }
-        System.out.println("Uri-webseite: " + uriWebsite);
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, uriWebsite);
         startActivity(browserIntent);
     }

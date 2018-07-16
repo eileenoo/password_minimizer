@@ -48,13 +48,6 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
 
         ImageView numberGridView = findViewById(R.id.numberGrid);
         numberGridView.setOnTouchListener(this);
-    }
-
-    @Override
-    protected void onResume()
-    {
-        super.onResume();
-
         setupNumberMatrix();
     }
 
