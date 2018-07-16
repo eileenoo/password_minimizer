@@ -91,7 +91,6 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
      * @return first picture pw with the according pw strength.
      */
     private PicturePassword getAccordingPicturePassword(PasswordStrength passwordStrength) {
-//        int currentPicturePasswordIndex = 0;
         PicturePassword currentPicturePassword = null;
         List<PicturePassword> picturePasswordList = Constants.getCurrentPicturePasswordList(this);
         for (PicturePassword picturePassword : picturePasswordList) {
@@ -99,29 +98,8 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
                 currentPicturePassword = picturePassword;
             }
         }
-//        for (int i = 0; i <= picturePasswordList.size(); i++) {
-//            if (picturePasswordList.get(i).getPasswordStrength() == passwordStrength) {
-//                currentPicturePasswordIndex = i;
-//                System.out.println(picturePasswordList.get(i).getPasswordName());
-//                break;
-//            }
-//        }
         return currentPicturePassword;
     }
-
-    /**
-     * Displays a picture password, which the user needs to unlock.
-     */
-    private void displayCorrectPicturePassword(PicturePassword currentPicturePassword) {
-//        Intent intent = new Intent(RedirectionWebToAppActivity.this, CheckPicturePasswordActivity.class);
-//        intent.putExtra(Constants.PICTURE_PASSWORD_INDEX, currentPWIndex);
-//        startActivity(intent);
-        //TODO: show correct pw
-//        pwCorrectAction();
-
-
-    }
-
 
     private void pwCorrectAction() {
         backToBrowser(true);
@@ -133,13 +111,17 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
      * 2) User can enter pw again.
      */
     private void pwIncorrectAction() {
-        //TODO: okListener: try again.
         Constants.showNewDialogOkCancelButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ERROR_DIALOG, Constants.REDIRECT_ERROR_OK_BTN, Constants.REDIRECT_ERROR_CANCEL_BTN, new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 backToBrowser(false);
             }
-        }, null);
+        }, new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                setupNumberMatrix();
+            }
+        });
     }
 
     /**
@@ -244,11 +226,10 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
         boolean isCorrect = numberGridGenerator.checkIfPasswordIsCorrect(password, positionDifferenceDp, numberGrid);
 
         if (isCorrect) {
-            Toast.makeText(getApplicationContext(), "Correct", Toast.LENGTH_SHORT).show();
+            pwCorrectAction();
 
         } else {
-            Toast.makeText(getApplicationContext(), R.string.string_wrong_password, Toast.LENGTH_SHORT).show();
-            setupNumberMatrix();
+            pwIncorrectAction();
         }
     }
 
