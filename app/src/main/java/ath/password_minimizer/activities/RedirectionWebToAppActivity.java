@@ -12,7 +12,6 @@ import android.util.TypedValue;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toast;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
@@ -68,8 +67,12 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
         }
         if (correctPassWordStrength != null) {
             currentPicturePassword = getAccordingPicturePassword(correctPassWordStrength);
-            //Show dialog and tell user to enter correct pw
-            Constants.showNewDialogOkButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ENTER_PW_DIALOG, Constants.REDIRECT_BUTTON_OK, null);
+            if (currentPicturePassword == null) {
+                noPasswordWithAccordingStrengthAction();
+            } else {
+                //Show dialog and tell user to enter correct pw
+                Constants.showNewDialogOkButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ENTER_PW_DIALOG, Constants.REDIRECT_BUTTON_OK, null);
+            }
         } else {
             noPasswordWithAccordingStrengthAction();
         }
@@ -80,7 +83,9 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
         ImageView numberGridView = findViewById(R.id.numberGridRedirect);
         numberGridView.setOnTouchListener(this);
 
-        setupNumberMatrix();
+        if (currentPicturePassword != null) {
+            setupNumberMatrix();
+        }
     }
 
     /**
@@ -93,9 +98,11 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
     private PicturePassword getAccordingPicturePassword(PasswordStrength passwordStrength) {
         PicturePassword currentPicturePassword = null;
         List<PicturePassword> picturePasswordList = Constants.getCurrentPicturePasswordList(this);
-        for (PicturePassword picturePassword : picturePasswordList) {
-            if (picturePassword.getPasswordStrength() == passwordStrength) {
-                currentPicturePassword = picturePassword;
+        if (picturePasswordList != null) {
+            for (PicturePassword picturePassword : picturePasswordList) {
+                if (picturePassword.getPasswordStrength() == passwordStrength) {
+                    currentPicturePassword = picturePassword;
+                }
             }
         }
         return currentPicturePassword;
@@ -137,6 +144,7 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
                 startActivity(new Intent(RedirectionWebToAppActivity.this, CreatePasswordActivity.class));
+                finish();
             }
         });
     }
@@ -157,14 +165,16 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
 //        } else {
 //            uriWebsite = Uri.parse(uriWebsite.toString() + "incorrect");
 //        }
-
-        if (currentPicturePassword.getPasswordStrength() == PasswordStrength.SIMPLE) {
+        if (currentPicturePassword == null) {
+            uriWebsite = Uri.parse("http://www.garten-pioniere.de.w017833c.kasserver.com/");
+        } else if (currentPicturePassword.getPasswordStrength() == PasswordStrength.SIMPLE) {
             uriWebsite = Uri.parse("http://www.garten-pioniere.de.w017833c.kasserver.com/");
         } else {
             uriWebsite = Uri.parse("http://trust-bank.de.w017833c.kasserver.com/");
         }
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, uriWebsite);
         startActivity(browserIntent);
+        finish();
     }
 
     private void setupNumberMatrix() {
