@@ -20,6 +20,7 @@ public class PasswordDetailSettingsActivity extends BaseActivity {
     Button changeNumberButton;
     Button changeSecurityButtton;
     Button deletePasswordButton;
+    Button practisePasswordButton;
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -51,6 +52,18 @@ public class PasswordDetailSettingsActivity extends BaseActivity {
         String picturePasswordName = (String) getIntent().getExtras().get("picturePasswordName");
         final PicturePassword picturePassword = Constants.getPicturePasswordByName(Constants.getJsonPicturePWList(this), picturePasswordName);
         getSupportActionBar().setTitle("Passwort: " + picturePassword.getPasswordName().toUpperCase());
+
+
+        practisePasswordButton = findViewById(R.id.practisePwButton);
+        practisePasswordButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intentPractise = new Intent(PasswordDetailSettingsActivity.this, CheckPicturePasswordActivity.class);
+                String picturePasswordName = (String) getIntent().getExtras().get("picturePasswordName");
+                intentPractise.putExtra(Constants.CHOSEN_NAME, picturePasswordName);
+                startActivity(intentPractise);
+            }
+        });
 
         changeImageButton = (Button) findViewById(R.id.changeImageButton);
         changeImageButton.setOnClickListener(new View.OnClickListener() {
