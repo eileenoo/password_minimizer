@@ -1,11 +1,13 @@
 package ath.password_minimizer.activities;
 
 import android.content.Intent;
+import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.v7.app.AppCompatActivity;
 import android.util.TypedValue;
 import android.view.MotionEvent;
@@ -14,6 +16,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import Util.Constants;
@@ -69,22 +72,30 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
 //
 //        BitmapFactory.Options options = new BitmapFactory.Options();
 //        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+//        options.inSampleSize = 4;
 //        Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
 //
-//        // At the end rememb^er to close the cursor or you will end with the RuntimeException!
 //        cursor.close();
-//
-//        return bitmap;
 
         Bitmap bitmap = null;
-        try {
+
+        try
+        {
             InputStream inputStream = getBaseContext().getContentResolver().openInputStream(imageUri);
             bitmap = BitmapFactory.decodeStream(inputStream);
-        } catch (FileNotFoundException e) {
+            inputStream.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
 
         return bitmap;
+
     }
 
     public boolean onTouch(View view, MotionEvent event)
@@ -123,12 +134,12 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         Bundle bundle = getIntent().getExtras();
         Uri imageUri = Uri.parse(bundle.getString(Constants.CHOSEN_IMAGE_URI));
         String chosenNumber = (String) bundle.get(Constants.CHOSEN_NUM);
-        PasswordStrength strength = (PasswordStrength)bundle.get(Constants.CHOSEN_PW_STRENGTH);
+        PasswordStrength strength = (PasswordStrength) bundle.get(Constants.CHOSEN_PW_STRENGTH);
 
         Bitmap passwordImage = getPasswordImage(imageUri);
         setDataAndViewElements(passwordImage);
         numberGrid = numberGridGenerator.generateNumberMatrix(Integer.parseInt(chosenNumber),
-                (ImageView) findViewById(R.id.numberGrid), strength,false);
+                (ImageView) findViewById(R.id.numberGrid), strength, false);
 
         ImageView numberGridView = findViewById(R.id.numberGrid);
 

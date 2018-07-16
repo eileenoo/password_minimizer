@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import Util.Constants;
@@ -51,7 +52,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
 
         getDataFromBundle();
         setDataAndViewElementss();
-        Constants.showNewDialogOkButton(CreatePWStep4Activity.this, Constants.DIALOG_PUT_NUM_TO_AREA, Constants.REDIRECT_BUTTON_OK, null);
+        //Constants.showNewDialogOkButton(CreatePWStep4Activity.this, Constants.DIALOG_PUT_NUM_TO_AREA, Constants.REDIRECT_BUTTON_OK, null);
     }
 
     private void getDataFromBundle() {
@@ -80,28 +81,45 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
 
     private Bitmap getChosenImage() {
         Bitmap bitmap = null;
-        try {
+
+        try
+        {
             InputStream inputStream = getBaseContext().getContentResolver().openInputStream(chosenImageUri);
             bitmap = BitmapFactory.decodeStream(inputStream);
-        } catch (FileNotFoundException e) {
+            inputStream.close();
+        }
+        catch (FileNotFoundException e)
+        {
+            e.printStackTrace();
+        }
+        catch (IOException e)
+        {
             e.printStackTrace();
         }
 
         return bitmap;
-        /*
 
-        String[] filePath = {MediaStore.Images.Media.DATA};
-        Cursor cursor = getContentResolver().query(chosenImageUri, filePath, null, null, null);
-        cursor.moveToFirst();
-        String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
 
-        BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
-        Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
-
-        cursor.close();
-
-        return bitmap; */
+//        String[] filePath = {MediaStore.Images.Media.DATA};
+//        Cursor cursor = getContentResolver().query(chosenImageUri, filePath, null, null, null);
+//        cursor.moveToFirst();
+//        String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
+//
+//        BitmapFactory.Options options = new BitmapFactory.Options();
+//        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
+//        options.inSampleSize = 4;
+//        Bitmap unscaledBitmap = BitmapFactory.decodeFile(imagePath, options);
+//        Bitmap scaledBitmap = null;
+//
+//        float calculatedWidthRatio = 600.0f / (float)unscaledBitmap.getHeight();
+//        scaledBitmap = Bitmap.createScaledBitmap(unscaledBitmap, (int)((float)unscaledBitmap.getWidth() * calculatedWidthRatio),
+//                600, false);
+//        unscaledBitmap.recycle();
+//        unscaledBitmap = null;
+//
+//        cursor.close();
+//
+//        return unscaledBitmap;
     }
 
 
