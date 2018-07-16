@@ -1,17 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:id="@+id/root"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:clipChildren="false"
+    android:clipToPadding="false"
     android:orientation="vertical"
-    android:gravity="center"
     tools:context="ath.password_minimizer.activities.RedirectionWebToAppActivity">
 
-    <Button
-        android:id="@+id/btn_example"
+    <ImageView
+        android:id="@+id/passwordImageContainerRedirect"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:scaleType="centerCrop"
+        android:src="@drawable/create_pw_button_background" />
+
+    <ImageView
+        android:id="@+id/numberGridRedirect"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:text="open website"/>
-</LinearLayout>
+        android:clipToPadding="false"
+        android:src="@drawable/numbers" />
+
+</FrameLayout>

@@ -14,6 +14,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import Util.Constants;
 import Util.PixelConverter;
 import ath.password_minimizer.R;
@@ -39,11 +42,9 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
         setContentView(R.layout.activity_check_picture_password);
 
         numberGridGenerator = new NumberGridGenerator(this, getStatusBarHeight());
-
         this.scale = getResources().getDisplayMetrics().density;
 
         Bundle bundle = getIntent().getExtras();
-
         int passwordIndex = bundle.getInt(Constants.PICTURE_PASSWORD_INDEX);
         String json = Constants.getJsonPicturePWList(this);
         picturePassword = Constants.getPicturePasswordList(json).get(passwordIndex);
@@ -54,15 +55,9 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
         numberGridView.setOnTouchListener(this);
     }
 
-    private void setDataAndViewElements(Bitmap passwordImage) {
-        ImageView passwordImageContainer;
-
-        passwordImageContainer = findViewById(R.id.passwordImageContainer);
-        passwordImageContainer.setImageBitmap(passwordImage);
-    }
-
     private void setupNumberMatrix() {
         Uri imageUri = Uri.parse(picturePassword.getImageUri());
+        System.out.println("Image Uri: " + imageUri);
         String chosenNumber = picturePassword.getPasswordNumber();
 
         Bitmap passwordImage = getPasswordImage(imageUri);
@@ -76,8 +71,15 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
         startPosition.y = numberGridView.getY();
     }
 
+    private void setDataAndViewElements(Bitmap passwordImage) {
+        ImageView passwordImageContainer;
+
+        passwordImageContainer = findViewById(R.id.passwordImageContainer);
+        passwordImageContainer.setImageBitmap(passwordImage);
+    }
+
     private Bitmap getPasswordImage(Uri imageUri) {
-        String[] filePath = {MediaStore.Images.Media.DATA};
+      /*  String[] filePath = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(imageUri, filePath, null, null, null);
         cursor.moveToFirst();
         String imagePath = cursor.getString(cursor.getColumnIndex(filePath[0]));
@@ -89,6 +91,14 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
         // At the end remember to close the cursor or you will end with the RuntimeException!
         cursor.close();
 
+        return bitmap; */
+        Bitmap bitmap = null;
+        try {
+            InputStream inputStream = getBaseContext().getContentResolver().openInputStream(imageUri);
+            bitmap = BitmapFactory.decodeStream(inputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
         return bitmap;
     }
 

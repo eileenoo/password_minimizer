@@ -77,7 +77,7 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
 //        options.inPreferredConfig = Bitmap.Config.ARGB_8888;
 //        Bitmap bitmap = BitmapFactory.decodeFile(imagePath, options);
 //
-//        // At the end remember to close the cursor or you will end with the RuntimeException!
+//        // At the end rememb^er to close the cursor or you will end with the RuntimeException!
 //        cursor.close();
 //
 //        return bitmap;
