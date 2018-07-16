@@ -72,6 +72,8 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
             } else {
                 //Show dialog and tell user to enter correct pw
                 Constants.showNewDialogOkButton(RedirectionWebToAppActivity.this, Constants.REDIRECT_ENTER_PW_DIALOG, Constants.REDIRECT_BUTTON_OK, null);
+                getSupportActionBar().setTitle("Passwort: " + currentPicturePassword.getPasswordName().toUpperCase());
+
             }
         } else {
             noPasswordWithAccordingStrengthAction();

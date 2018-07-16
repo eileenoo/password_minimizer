@@ -43,6 +43,8 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
 
         String picturePasswordName = (String) getIntent().getExtras().get(Constants.CHOSEN_NAME);
         currentPicturePassword = Constants.getPicturePasswordByName(Constants.getJsonPicturePWList(this), picturePasswordName);
+        getSupportActionBar().setTitle("Passwort: " + currentPicturePassword.getPasswordName().toUpperCase());
+
 
         // Show grid
         numberGridGenerator = new NumberGridGenerator(this, getStatusBarHeight());
@@ -122,7 +124,7 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
             Toast.makeText(this, "Correct", Toast.LENGTH_LONG).show();
 
         } else {
-            Toast.makeText(this, "Correct", Toast.LENGTH_LONG).show();
+            Toast.makeText(this, "Incorrect", Toast.LENGTH_LONG).show();
 
         }
     }
