@@ -167,7 +167,9 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
 //        }
         if (currentPicturePassword == null) {
             uriWebsite = Uri.parse("http://www.garten-pioniere.de.w017833c.kasserver.com/");
-        } else if (currentPicturePassword.getPasswordStrength() == PasswordStrength.SIMPLE) {
+        } else if (currentPicturePassword.getPasswordStrength() == PasswordStrength.SIMPLE && wasPasswordEnteredCorrect) {
+            uriWebsite = Uri.parse("http://www.garten-pioniere.de.w017833c.kasserver.com/correct.html");
+        } else if (currentPicturePassword.getPasswordStrength() == PasswordStrength.SIMPLE && !wasPasswordEnteredCorrect) {
             uriWebsite = Uri.parse("http://www.garten-pioniere.de.w017833c.kasserver.com/");
         } else {
             uriWebsite = Uri.parse("http://trust-bank.de.w017833c.kasserver.com/");
