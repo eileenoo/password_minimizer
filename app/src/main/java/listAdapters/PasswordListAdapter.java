@@ -1,8 +1,11 @@
 package listAdapters;
 
 import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,8 +60,10 @@ public class PasswordListAdapter extends BaseAdapter {
         TextView passwordNameView = (TextView) view.findViewById(R.id.password_name);
         RelativeLayout backgroundLayout = view.findViewById(R.id.background_color_layout);
 
-        Uri imageUri = Uri.parse(mPicturePasswordItems.get(position).getImageUri());
-        passwordImageView.setImageURI(imageUri);
+        ViewHolder holder = new ViewHolder();
+        holder.thumbnail = (ImageView) view.findViewById(R.id.password_image);
+        holder.position = position;
+        new ThumbnailTask(position, holder).executeOnExecutor(AsyncTask.THREAD_POOL_EXECUTOR, Uri.parse(mPicturePasswordItems.get(position).getImageUri()));
 
         passwordNameView.setText( mPicturePasswordItems.get(position).getPasswordName());
 
@@ -78,5 +83,33 @@ public class PasswordListAdapter extends BaseAdapter {
         }
 
         return view;
+    }
+
+    private static class ThumbnailTask extends AsyncTask {
+        private int mPosition;
+        private ViewHolder mHolder;
+
+        public ThumbnailTask(int position, ViewHolder holder) {
+            mPosition = position;
+            mHolder = holder;
+        }
+
+        @Override
+        protected Object doInBackground(Object[] objects) {
+            return objects[0];
+        }
+
+        @Override
+        protected void onPostExecute(Object o) {
+            Uri uri = (Uri) o;
+            if (mHolder.position == mPosition) {
+                mHolder.thumbnail.setImageURI(uri);
+            }
+        }
+    }
+
+    private static class ViewHolder {
+        public ImageView thumbnail;
+        public int position;
     }
 }
