@@ -49,6 +49,7 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
         uriWebsite = getIntent().getData();
         String currentPWStrength = uriWebsite.toString().substring(uriWebsite.toString().lastIndexOf("=") + 1);
 
+        System.out.println("pw " + currentPWStrength);
         // Get current pw strength
         PasswordStrength correctPassWordStrength;
         switch (currentPWStrength) {
@@ -174,7 +175,7 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
         } else if (currentPicturePassword.getPasswordStrength() == PasswordStrength.SIMPLE && !wasPasswordEnteredCorrect) {
             uriWebsite = Uri.parse("http://www.garten-pioniere.de.w017833c.kasserver.com/");
         } else {
-            uriWebsite = Uri.parse("http://trust-bank.de.w017833c.kasserver.com/");
+            uriWebsite = Uri.parse("http://trust-bank.de.w017833c.kasserver.com/correct.html");
         }
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, uriWebsite);
         startActivity(browserIntent);
