@@ -3,33 +3,41 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:background="@color/colorPrimaryDark"
+    android:orientation="vertical"
     tools:context="ath.password_minimizer.activities.StartPinActivity">
 
-    <LinearLayout
-        android:id="@+id/layout_upper"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="1"
-        android:orientation="vertical">
 
 
         <LinearLayout
             android:id="@+id/layout_logo"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2.5"
+            android:orientation="vertical">
+
+            <ImageView
+                android:layout_marginTop="15dp"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/icon_picture_password" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_text"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="0.5"
+            android:gravity="bottom"
             android:orientation="vertical">
 
             <TextView
+                android:gravity="center"
                 android:id="@+id/enter_pw_text"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:textColor="@color/color_white"
+                android:layout_height="wrap_content"
                 android:text="@string/string_enter_pw"
-                android:gravity="center|bottom"
-                />
+                android:textColor="@color/color_white" />
 
         </LinearLayout>
 
@@ -38,7 +46,7 @@
             android:id="@+id/layout_pin_fields"
             android:layout_width="match_parent"
             android:layout_height="0dp"
-            android:layout_weight="1"
+            android:layout_weight="2"
             android:orientation="horizontal">
 
             <TextView
@@ -105,7 +113,6 @@
                 android:textColor="@color/color_white"
                 android:textSize="@dimen/dimen_pinField_password_text_size" />
         </LinearLayout>
-    </LinearLayout>
 
 
     <LinearLayout
@@ -113,7 +120,7 @@
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_margin="@dimen/dimen_margin_gridlayout_pin"
-        android:layout_weight="1"
+        android:layout_weight="5"
         android:orientation="vertical">
 
         <GridLayout

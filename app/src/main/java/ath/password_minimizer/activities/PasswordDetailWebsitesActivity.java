@@ -77,6 +77,10 @@ public class PasswordDetailWebsitesActivity extends BaseActivity {
         getSupportActionBar().setTitle("Passwort: " + picturePassword.getPasswordName().toUpperCase());
         websites = picturePassword.getWebsites();
 
+        if (websites.size() > 0) {
+            findViewById(R.id.add_websites_text).setVisibility(View.GONE);
+        }
+
         websiteListAdapter = new WebsiteListAdapter (websites, getApplicationContext());
         websitesListView.setAdapter(websiteListAdapter);
 
@@ -108,6 +112,7 @@ public class PasswordDetailWebsitesActivity extends BaseActivity {
                 websites.add(addedWebsite);
                 PasswordManager passwordManager = PasswordManager.getInstance();
                 passwordManager.updateWebsitesOfPicturePassword(picturePassword);
+                findViewById(R.id.add_websites_text).setVisibility(View.GONE);
 
                 nameBox.setText("");
                 nameBox.requestFocus();
