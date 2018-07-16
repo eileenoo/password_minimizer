@@ -181,7 +181,7 @@ public class RedirectionWebToAppActivity extends AppCompatActivity implements Vi
 
         // Setup matrix
         numberGrid = numberGridGenerator.generateNumberMatrix(Integer.parseInt(currentPicturePassword.getPasswordNumber()),
-                (ImageView) findViewById(R.id.numberGridRedirect), false);
+                (ImageView) findViewById(R.id.numberGridRedirect), currentPicturePassword.getPasswordStrength(), false);
 
         ImageView numberGridView = findViewById(R.id.numberGridRedirect);
 
