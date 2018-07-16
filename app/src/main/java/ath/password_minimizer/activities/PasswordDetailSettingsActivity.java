@@ -10,7 +10,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 
+import Util.Constants;
 import ath.password_minimizer.R;
+import model.PicturePassword;
 
 public class PasswordDetailSettingsActivity extends BaseActivity {
 
@@ -46,6 +48,9 @@ public class PasswordDetailSettingsActivity extends BaseActivity {
         setNavigationBar();
 
         initBurgerMenu();
+        String picturePasswordName = (String) getIntent().getExtras().get("picturePasswordName");
+        final PicturePassword picturePassword = Constants.getPicturePasswordByName(Constants.getJsonPicturePWList(this), picturePasswordName);
+        getSupportActionBar().setTitle("Passwort: " + picturePassword.getPasswordName().toUpperCase());
 
         changeImageButton = (Button) findViewById(R.id.changeImageButton);
         changeImageButton.setOnClickListener(new View.OnClickListener() {

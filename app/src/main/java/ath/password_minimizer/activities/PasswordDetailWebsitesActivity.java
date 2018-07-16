@@ -74,6 +74,7 @@ public class PasswordDetailWebsitesActivity extends BaseActivity {
 
         String picturePasswordName = (String) getIntent().getExtras().get("picturePasswordName");
         final PicturePassword picturePassword = Constants.getPicturePasswordByName(Constants.getJsonPicturePWList(this), picturePasswordName);
+        getSupportActionBar().setTitle("Passwort: " + picturePassword.getPasswordName().toUpperCase());
         websites = picturePassword.getWebsites();
 
         websiteListAdapter = new WebsiteListAdapter (websites, getApplicationContext());
