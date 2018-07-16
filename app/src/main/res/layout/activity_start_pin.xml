@@ -17,10 +17,12 @@
             android:orientation="vertical">
 
             <ImageView
+                android:scaleType="fitCenter"
                 android:layout_marginTop="15dp"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:src="@drawable/icon_picture_password" />
+
         </LinearLayout>
 
         <LinearLayout
