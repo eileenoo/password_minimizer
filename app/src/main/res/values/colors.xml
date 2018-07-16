@@ -13,9 +13,9 @@
     <color name="color_main_violet">#8554CF</color>
     <color name="color_main_lighter_violet">#B923E6</color>
 
-    <color name="color_simple_pw">#2ecc71</color>
-    <color name="color_middle_pw">#f1c40f</color>
-    <color name="color_strong_pw">#e74c3c</color>
+    <color name="color_simple_pw">#668FB9</color>
+    <color name="color_middle_pw">#486684</color>
+    <color name="color_strong_pw">#34495e</color>
 
     <color name="color_inactive">#bdc3c7</color>
     <color name="color_inactive_text">#ecf0f1</color>
