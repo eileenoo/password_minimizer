@@ -15,6 +15,9 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.ImageView;
 
+import java.io.FileNotFoundException;
+import java.io.InputStream;
+
 import Util.Constants;
 import Util.PixelConverter;
 import ath.password_minimizer.R;
@@ -58,7 +61,6 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
         ImageView passwordImageContainer = findViewById(R.id.passwordImageContainer);
         passwordImageContainer.setImageBitmap(getChosenImage());
 
-
         scale = getResources().getDisplayMetrics().density;
 
         ImageView numberGridView = findViewById(R.id.numberGrid);
@@ -73,6 +75,17 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
     }
 
     private Bitmap getChosenImage() {
+        Bitmap bitmap = null;
+        try {
+            InputStream inputStream = getBaseContext().getContentResolver().openInputStream(chosenImageUri);
+            bitmap = BitmapFactory.decodeStream(inputStream);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
+        return bitmap;
+        /*
+
         String[] filePath = {MediaStore.Images.Media.DATA};
         Cursor cursor = getContentResolver().query(chosenImageUri, filePath, null, null, null);
         cursor.moveToFirst();
@@ -84,7 +97,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
 
         cursor.close();
 
-        return bitmap;
+        return bitmap; */
     }
 
 

@@ -33,9 +33,9 @@ public class Constants {
     public final static String ERROR_EMPTY_PIN_NAME = "Bitte gib einen Namen für das Passwort ein.";
     public final static String TOAST_ERROR_CHOOSE_IMAGE = "Bitte wähle ein Bild für dein Passwort aus.";
 
-    public final static String SIMPLE = "password simple";
-    public final static String MIDDLE = "password middle";
-    public final static String STRONG = "password strong";
+    public final static String SIMPLE = "simple";
+    public final static String MIDDLE = "middle";
+    public final static String STRONG = "strong";
 
     public final static String CHOSEN_PW_STRENGTH = "passwordStrength";
     public final static String CHOSEN_NUM = "chosenNum";
@@ -51,6 +51,8 @@ public class Constants {
     public final static String REDIRECT_ERROR_DIALOG = "The entered password is incorrect.";
     public final static String REDIRECT_ERROR_OK_BTN = "Try again";
     public final static String REDIRECT_ERROR_CANCEL_BTN = "Back to website";
+    public final static String REDIRECT_NO_PW_DIALOG= "You don't have any Picture Passwords for this website. Create a new Picture Password or return to website.";
+    public final static String REDIRECT_CREATE_PW= "Create new Password";
 
     private final static String SHARED_PREFERENCES_PASSWORD_MINIMIZER = "sharedPreferencesPWMinimizer";
     private final static String LIST_PICTURE_PASSWORDS = "listOfPicturePasswords";
