@@ -18,6 +18,9 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Random;
 import java.util.concurrent.ThreadLocalRandom;
 
@@ -96,7 +99,7 @@ public class NumberGridGenerator
         return result;
     }
 
-    public int[] generateNumberMatrix(int passwordNumber, ImageView numberGridImageView, boolean forSelection)
+    public int[] generateNumberMatrix(int passwordNumber, ImageView numberGridImageView, PasswordStrength strength, boolean forSelection)
     {
         int pixelDim = BitmapFactory.decodeResource(context.getResources(),
                 R.drawable.number1).getWidth();
@@ -110,7 +113,8 @@ public class NumberGridGenerator
         }
         else
         {
-            numbers = getEvenlyDistributedRandomNumbers(numbersPerRow * numbersPerColumn);
+            int numberCount = getNumerCountFromPasswordStrength(strength);
+            numbers = getEvenlyDistributedRandomNumbers(numbersPerRow * numbersPerColumn, numberCount, passwordNumber);
         }
 
         Bitmap numbersGrid = createNumberGridBitmap(numbersPerRow, numbersPerColumn, numbers, pixelDim, forSelection);
@@ -164,30 +168,49 @@ public class NumberGridGenerator
         return numbers;
     }
 
-    private int[] getEvenlyDistributedRandomNumbers(int count)
+    private int[] getEvenlyDistributedRandomNumbers(int quantity, int differentNumberCount, int passwordNumber)
     {
-        int[] numbers = new int[count];
+        if (differentNumberCount <= 1)
+        {
+            differentNumberCount = 2;
+        }
 
-        int rest = count % 9;
-        int countNoRest = count - rest;
-        int chunkCount = countNoRest / 9;
+        int[] numbers = new int[quantity];
+
+        int rest = quantity % differentNumberCount;
+        int countNoRest = quantity - rest;
+        int chunkCount = countNoRest / differentNumberCount;
+
+        LinkedList<Integer> numberChunkSelection = new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5, 6, 7, 8, 9));
+        numberChunkSelection.remove(passwordNumber - 1);
+        Integer[] numberChunkSelectionArr = (Integer[])numberChunkSelection.toArray(new Integer[numberChunkSelection.size()]);
+
+        int[] numberChunk = new int[differentNumberCount];
+        numberChunk[0] = passwordNumber;
+        shuffleArray(numberChunkSelectionArr);
+
+        for (int i = 0; i < differentNumberCount - 1; i++)
+        {
+
+            int number = numberChunkSelectionArr[i];
+            numberChunk[i + 1] = number;
+        }
 
         for (int i = 0; i < chunkCount; i++)
         {
-            int[] numberChunk = new int[] {1, 2, 3, 4, 5, 6, 7, 8, 9};
             shuffleArray(numberChunk);
 
-            for (int j = i * 9; j < (i * 9) + 9; j++)
+            for (int j = i * differentNumberCount; j < (i * differentNumberCount) + differentNumberCount; j++)
             {
-                numbers[j] = numberChunk[j - (i * 9)];
+                numbers[j] = numberChunk[j - (i * differentNumberCount)];
             }
         }
 
         int[] randomRestNumbers = getRandomNumbers(rest);
 
-        for (int i = count - rest; i < count; i++)
+        for (int i = quantity - rest; i < quantity; i++)
         {
-            numbers[i] = randomRestNumbers[i - (count - rest)];
+            numbers[i] = randomRestNumbers[i - (quantity - rest)];
         }
 
         return numbers;
@@ -278,5 +301,39 @@ public class NumberGridGenerator
             ar[index] = ar[i];
             ar[i] = a;
         }
+    }
+
+    // Implementing Fisher–Yates shuffle
+    private void shuffleArray(Integer[] ar)
+    {
+        Random rnd = new Random();
+        for (int i = ar.length - 1; i > 0; i--)
+        {
+            int index = rnd.nextInt(i + 1);
+            // Simple swap
+            int a = ar[index];
+            ar[index] = ar[i];
+            ar[i] = a;
+        }
+    }
+
+    private int getNumerCountFromPasswordStrength(PasswordStrength strength)
+    {
+        int numberCount = 0;
+
+        switch(strength)
+        {
+            case SIMPLE:
+                numberCount = 3;
+                break;
+            case MIDDLE:
+                numberCount = 5;
+                break;
+            case STRONG:
+                numberCount = 9;
+                break;
+        }
+
+        return numberCount;
     }
 }

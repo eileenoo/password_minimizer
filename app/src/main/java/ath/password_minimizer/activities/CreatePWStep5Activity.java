@@ -122,11 +122,12 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         Bundle bundle = getIntent().getExtras();
         Uri imageUri = Uri.parse(bundle.getString(Constants.CHOSEN_IMAGE_URI));
         String chosenNumber = (String) bundle.get(Constants.CHOSEN_NUM);
+        PasswordStrength strength = (PasswordStrength)bundle.get(Constants.CHOSEN_PW_STRENGTH);
 
         Bitmap passwordImage = getPasswordImage(imageUri);
         setDataAndViewElements(passwordImage);
         numberGrid = numberGridGenerator.generateNumberMatrix(Integer.parseInt(chosenNumber),
-                (ImageView) findViewById(R.id.numberGrid), false);
+                (ImageView) findViewById(R.id.numberGrid), strength,false);
 
         ImageView numberGridView = findViewById(R.id.numberGrid);
 

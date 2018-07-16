@@ -63,7 +63,7 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
         Bitmap passwordImage = getPasswordImage(imageUri);
         setDataAndViewElements(passwordImage);
         numberGrid = numberGridGenerator.generateNumberMatrix(Integer.parseInt(chosenNumber),
-                (ImageView) findViewById(R.id.numberGrid), false);
+                (ImageView) findViewById(R.id.numberGrid), picturePassword.getPasswordStrength(),false);
 
         ImageView numberGridView = findViewById(R.id.numberGrid);
 
