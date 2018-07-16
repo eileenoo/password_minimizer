@@ -26,9 +26,11 @@
         <ImageButton
             android:id="@+id/pickImageButton"
             android:backgroundTint="@android:color/transparent"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:src="@mipmap/ic_launcher_round"
+            android:layout_width="300px"
+            android:layout_height="300px"
+            android:scaleType="fitEnd"
+            android:src="@drawable/ic_plus_button"
+            android:tint="@color/colorPrimaryDark"
             android:layout_gravity="center"
             android:contentDescription="@string/string_create_pw_choose_image_description"/>
 

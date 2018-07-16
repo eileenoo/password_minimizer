@@ -33,6 +33,9 @@ public class Constants {
     public final static String ERROR_EMPTY_PIN_NAME = "Bitte gib einen Namen für das Passwort ein.";
     public final static String TOAST_ERROR_CHOOSE_IMAGE = "Bitte wähle ein Bild für dein Passwort aus.";
 
+    public final static String DIALOG_PUT_NUM_TO_AREA = "Bitte ziehe jetzt deinen gewählten Buchstaben an einen beliebigen Ort auf dem Bild.";
+    public final static String DIALOG_PUT_NUM_TO_AREA_REPEAT = "Bitte ziehe deinen gewählten Buchstaben erneut an den eben gewählten Bereich.";
+
     public final static String SIMPLE = "simple";
     public final static String MIDDLE = "middle";
     public final static String STRONG = "strong";

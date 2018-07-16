@@ -49,6 +49,7 @@ public class CreatePWStep5Activity extends AppCompatActivity implements View.OnT
         ImageView numberGridView = findViewById(R.id.numberGrid);
         numberGridView.setOnTouchListener(this);
         setupNumberMatrix();
+        Constants.showNewDialogOkButton(CreatePWStep5Activity.this, Constants.DIALOG_PUT_NUM_TO_AREA_REPEAT, Constants.REDIRECT_BUTTON_OK, null);
     }
 
     private void setDataAndViewElements(Bitmap passwordImage)

@@ -51,6 +51,7 @@ public class CreatePWStep4Activity extends AppCompatActivity implements View.OnT
 
         getDataFromBundle();
         setDataAndViewElementss();
+        Constants.showNewDialogOkButton(CreatePWStep4Activity.this, Constants.DIALOG_PUT_NUM_TO_AREA, Constants.REDIRECT_BUTTON_OK, null);
     }
 
     private void getDataFromBundle() {
