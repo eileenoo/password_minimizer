@@ -13,6 +13,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import Util.Constants;
@@ -63,9 +64,16 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
         try {
             InputStream inputStream = getBaseContext().getContentResolver().openInputStream(Uri.parse(currentPicturePassword.getImageUri()));
             bitmap = BitmapFactory.decodeStream(inputStream);
+            inputStream.close();
         } catch (FileNotFoundException e) {
             e.printStackTrace();
         }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+
+
         ImageView passwordImageContainer = findViewById(R.id.passwordImageContainer);
         passwordImageContainer.setImageBitmap(bitmap);
 
