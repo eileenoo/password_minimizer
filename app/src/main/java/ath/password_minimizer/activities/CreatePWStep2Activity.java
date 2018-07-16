@@ -21,6 +21,7 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 
 import Util.Constants;
@@ -51,6 +52,14 @@ public class CreatePWStep2Activity extends AppCompatActivity {
         setOnClickListener();
 
         checkPermissions();
+    }
+
+    @Override
+    protected void onResume()
+    {
+        super.onResume();
+
+
     }
 
     private void setViewAndDataElements() {
@@ -151,7 +160,12 @@ public class CreatePWStep2Activity extends AppCompatActivity {
                 pickedImageView.setVisibility(View.VISIBLE);
                 pickImageButton.setVisibility(View.GONE);
                 passwordImage = bitmap;
+                inputStream.close();
             } catch (FileNotFoundException e) {
+                e.printStackTrace();
+            }
+            catch (IOException e)
+            {
                 e.printStackTrace();
             }
 
