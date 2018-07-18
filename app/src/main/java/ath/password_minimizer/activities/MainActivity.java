@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ImageButton;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -26,8 +27,10 @@ public class MainActivity extends BaseActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        TextView infoMessage = findViewById(R.id.info_message);
         if(userHasPasswords()) {
             picturePasswords = (ArrayList<PicturePassword>) Constants.getPicturePasswordList(Constants.getJsonPicturePWList(this));
+            infoMessage.setVisibility(View.GONE);
         } else {
             picturePasswords = new ArrayList<>();
         }

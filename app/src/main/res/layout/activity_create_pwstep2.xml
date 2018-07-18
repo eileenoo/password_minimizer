@@ -30,7 +30,7 @@
             android:layout_height="300px"
             android:scaleType="fitEnd"
             android:src="@drawable/ic_plus_button"
-            android:tint="@color/colorPrimaryDark"
+            android:tint="@color/colorAccent"
             android:layout_gravity="center"
             android:contentDescription="@string/string_create_pw_choose_image_description"/>
 
@@ -56,26 +56,26 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/dimen_buttons_create_pw_text_size" />
 
-    <RelativeLayout
-        android:id="@+id/step2_custom_progressbar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:orientation="horizontal">
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/step2_custom_progressbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="0.5"-->
+        <!--android:orientation="horizontal">-->
+        <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/pager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-        </android.support.v4.view.ViewPager>
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_dots"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tab_selector"
-            android:layout_alignParentBottom="true">
+        <!--</android.support.v4.view.ViewPager>-->
+        <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/tab_dots"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/tab_selector"-->
+            <!--android:layout_alignParentBottom="true">-->
 
-        </android.support.design.widget.TabLayout>
-    </RelativeLayout>
+        <!--</android.support.design.widget.TabLayout>-->
+    <!--</RelativeLayout>-->
 
 </LinearLayout>

@@ -5,6 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+    <TextView
+        android:id="@+id/info_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="15dp"
+        android:gravity="center"
+        android:text="@string/string_add_pw"
+        android:textColor="@color/colorPrimary"
+        android:textSize="@dimen/dimen_create_pw_info_text" />
+
     <android.support.v4.widget.DrawerLayout
         android:id="@+id/drawerLayout"
         android:layout_width="match_parent"

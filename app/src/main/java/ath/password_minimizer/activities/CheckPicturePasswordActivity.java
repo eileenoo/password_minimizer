@@ -27,6 +27,7 @@ import model.Vector2;
 public class CheckPicturePasswordActivity extends AppCompatActivity implements View.OnTouchListener {
     private PicturePassword currentPicturePassword;
 
+    private Toast toast;
     private float xDelta;
     private float yDelta;
     private float scale;
@@ -41,7 +42,6 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_check_picture_password);
-
         String picturePasswordName = (String) getIntent().getExtras().get(Constants.CHOSEN_NAME);
         currentPicturePassword = Constants.getPicturePasswordByName(Constants.getJsonPicturePWList(this), picturePasswordName);
         getSupportActionBar().setTitle("Passwort: " + currentPicturePassword.getPasswordName().toUpperCase());
@@ -129,11 +129,20 @@ public class CheckPicturePasswordActivity extends AppCompatActivity implements V
         boolean isCorrect = numberGridGenerator.checkIfPasswordIsCorrect(password, positionDifferenceDp, numberGrid);
 
         if (isCorrect) {
-            Toast.makeText(this, "Password is correct", Toast.LENGTH_LONG).show();
+            if (toast != null) {
+                toast.cancel();
+            }
+            toast = Toast.makeText(this, "Password is correct", Toast.LENGTH_SHORT);
+            toast.show();
+            setupNumberMatrix();
 
         } else {
-            Toast.makeText(this, "Password is incorrect", Toast.LENGTH_LONG).show();
-
+            if (toast != null) {
+                toast.cancel();
+            }
+            toast = Toast.makeText(this, "Password is wrong", Toast.LENGTH_SHORT);
+            toast.show();
+            setupNumberMatrix();
         }
     }
 

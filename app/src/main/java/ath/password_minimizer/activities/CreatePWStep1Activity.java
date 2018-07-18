@@ -50,9 +50,6 @@ public class CreatePWStep1Activity extends AppCompatActivity {
         });
         pwNameField.requestFocus();
 
-        ViewPager mImageViewPager = findViewById(R.id.pager);
-        TabLayout mTabLayout = findViewById(R.id.tab_dots);
-        mTabLayout.setupWithViewPager(mImageViewPager, true);
     }
 
     private void setOnClickListener() {

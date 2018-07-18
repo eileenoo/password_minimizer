@@ -30,6 +30,7 @@
     <string name="string_pin_question">question</string>
 
     <string name="string_enter_pw">Bitte gib deinen PIN ein.</string>
+    <string name="string_add_pw">Drücke den Plus-Button in der rechten unteren Ecke um ein Picture Password zu erstellen.</string>
 
     <string name="name">Name</string>
     <string name="username">Benutzername</string>

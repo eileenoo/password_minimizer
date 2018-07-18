@@ -45,56 +45,69 @@
         android:textColor="@android:color/white"
         android:textSize="@dimen/dimen_buttons_create_pw_text_size" />
 
-    <RelativeLayout
-        android:id="@+id/step1_custom_progressbar"
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:gravity="center"
-        android:orientation="horizontal">
+    <!--<RelativeLayout-->
+        <!--android:id="@+id/step1_custom_progressbar"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="0dp"-->
+        <!--android:layout_weight="0.5"-->
+        <!--android:gravity="center"-->
+        <!--android:orientation="horizontal">-->
 
-        <android.support.v4.view.ViewPager
-            android:id="@+id/pager"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
+        <!--<android.support.v4.view.ViewPager-->
+            <!--android:id="@+id/pager"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="match_parent">-->
 
-        </android.support.v4.view.ViewPager>
-        <android.support.design.widget.TabLayout
-            android:id="@+id/tab_dots"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/tab_selector"
-            android:layout_alignParentBottom="true">
+        <!--</android.support.v4.view.ViewPager>-->
+        <!--<android.support.design.widget.TabLayout-->
+            <!--android:id="@+id/tab_dots"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:background="@drawable/tab_selector"-->
+            <!--android:layout_alignParentBottom="true">-->
+        <!--</android.support.design.widget.TabLayout>-->
 
-        </android.support.design.widget.TabLayout>
 
-        <!--
 
-        <ImageView
-            android:padding="@dimen/dimen_padding_dots"
-            android:id="@+id/step1_dot1"
-            android:src="@drawable/progress_dot_dark"
-            android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+        <!--<ImageView-->
+            <!--android:padding="@dimen/dimen_padding_dots"-->
+            <!--android:id="@+id/step1_dot1"-->
+            <!--android:src="@drawable/tab_indicator_default"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent" />-->
 
-        <ImageView
-            android:paddingTop="@dimen/dimen_padding_dots"
-            android:paddingBottom="@dimen/dimen_padding_dots"
-            android:paddingLeft="-40dp"
-            android:paddingRight="-40dp"
-            android:id="@+id/step1_dot2"
-            android:src="@drawable/progress_dot"
-            android:layout_width="wrap_content"
-            android:scaleType="centerInside"
-            android:layout_height="match_parent" />
+        <!--<ImageView-->
+            <!--android:padding="@dimen/dimen_padding_dots"-->
+            <!--android:id="@+id/step1_dot2"-->
+            <!--android:src="@drawable/tab_indicator_default"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent" />-->
 
-        <ImageView
-            android:padding="@dimen/dimen_padding_dots"
-            android:id="@+id/step1_dot3"
-            android:src="@drawable/progress_dot"
-            android:layout_width="wrap_content"
-            android:scaleType="centerInside"
-            android:layout_height="match_parent" />
--->
-    </RelativeLayout>
+
+        <!--<ImageView-->
+            <!--android:padding="@dimen/dimen_padding_dots"-->
+            <!--android:id="@+id/step1_dot3"-->
+            <!--android:src="@drawable/tab_indicator_default"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="match_parent" />        &lt;!&ndash;-->
+           <!--<ImageView
+               android:paddingTop="@dimen/dimen_padding_dots"
+               android:paddingBottom="@dimen/dimen_padding_dots"
+               android:paddingLeft="-40dp"
+               android:paddingRight="-40dp"
+               android:id="@+id/step1_dot2"
+               android:src="@drawable/progress_dot"
+               android:layout_width="wrap_content"
+               android:scaleType="centerInside"
+               android:layout_height="match_parent" />
+
+           <ImageView
+               android:padding="@dimen/dimen_padding_dots"
+               android:id="@+id/step1_dot3"
+               android:src="@drawable/progress_dot"
+               android:layout_width="wrap_content"
+               android:scaleType="centerInside"
+               android:layout_height="match_parent" />
+   -->
+    <!--</RelativeLayout>-->
 </LinearLayout>
